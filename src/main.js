@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Créé le sélecteur d'étages, à terme viendra d'un JSON fournit par Drupal (taxo)
   async function createLevelSwitcherControl() {
       try {
-          const url = 'assets/json/eap-levels.json';
+          const url = 'json/eap-levels.json';
           let response = await fetch(url);
           if (!response.ok)
               throw new Error(response.statusText);
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Créé le sélecteur de catégories de POI à partir de la liste de catégories découverte dans la liste des POI
   async function createCategorySwitcherControl() {
       try {
-          const url = 'assets/json/eap-categories.json';
+          const url = 'json/eap-categories.json';
           let response = await fetch(url);
           if (!response.ok)
               throw new Error(response.statusText);
@@ -231,8 +231,8 @@ document.addEventListener('DOMContentLoaded', function() {
   /*function loadGeoJSON(type, level) {
       console.log('loadGeoJSON', type, level)
       const url = type === 'level'
-          ? `assets/json/level_${level}.geojson`
-          : `assets/json/parking_${level}.geojson`;
+          ? `json/level_${level}.geojson`
+          : `json/parking_${level}.geojson`;
 
       fetch(url)
           .then(response => response.ok ? response.json() : Promise.reject(`GeoJSON file not found: ${url}`))
@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                       const el = document.createElement('div');
                       el.className = 'marker';
-                      el.style.backgroundImage = `url('assets/images/icons/${icon}.png')`;
+                      el.style.backgroundImage = `url('images/icons/${icon}.png')`;
 
                       el.addEventListener('click', () => {
                           showModal(feature);
@@ -408,7 +408,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Chargement d'un GeoJSON décrivant l'étage sélectionné
   function loadLevelGeoJSON(level) {
       console.log('loadLevelGeoJSON', level)
-      const url = `assets/json/eap-level_${level}.geojson`;
+      const url = `json/eap-level_${level}.geojson`;
       
       if (!levels.includes(level)) {
           console.log(`Level ${level} never loaded => requesting`);
@@ -513,7 +513,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (!poiLoaded) {
           try {
-              const url = 'assets/json/eap-poi.geojson';
+              const url = 'json/eap-poi.geojson';
               let response = await fetch(url);
               if (!response.ok)
                   throw new Error(response.statusText);

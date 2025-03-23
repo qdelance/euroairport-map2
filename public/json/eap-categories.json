@@ -1,49 +1,49 @@
 [
     {
         "id": "bar",
-        "icon": "./assets/images/icons/eap-bar.png",
+        "icon": "./icons/eap-bar.png",
         "name": "Bars"
     },
     {
         "id": "restaurant",
-        "icon": "./assets/images/icons/eap-restaurant.png",
+        "icon": "./icons/eap-restaurant.png",
         "name": "Restaurants"
     },
     {
         "id": "toilets",
-        "icon": "./assets/images/icons/eap-toilets.png",
+        "icon": "./icons/eap-toilets.png",
         "name": "Toilettes"
     },
     {
         "id": "gate",
-        "icon": "./assets/images/icons/eap-gate.png",
+        "icon": "./icons/eap-gate.png",
         "name": "Portes d'embarquement"
     },
     {
         "id": "belt",
-        "icon": "./assets/images/icons/eap-belt.png",
+        "icon": "./icons/eap-belt.png",
         "name": "Tapis bagage"
     },
     {
         "id": "check",
-        "icon": "./assets/images/icons/eap-check.png",
+        "icon": "./icons/eap-check.png",
         "name": "Guichets d'enregistrement"
     },
     {
         "id": "parking",
-        "icon": "./assets/images/icons/eap-parking-fr.png",
+        "icon": "./icons/eap-parking-fr.png",
         "name": "Parkings"
     },
     {
         "id": "parking-ch",
         "parent": "parking",
-        "icon": "./assets/images/icons/eap-parking-ch.png",
+        "icon": "./icons/eap-parking-ch.png",
         "name": "Parkings CH"
     },
     {
         "id": "parking-fr",
         "parent": "parking",
-        "icon": "./assets/images/icons/eap-parking-fr.png",
+        "icon": "./icons/eap-parking-fr.png",
         "name": "Parkings FR"
     }
 ]
