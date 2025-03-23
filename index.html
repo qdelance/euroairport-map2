@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EAP : Plan interactif</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+    <div class="interactive-plan">
+      <ul class="interactive-plan__category">
+      </ul>
+      <div class="interactive-plan__actions">
+          <button class="interactive-plan__switch">Dark</button>
+          <button class="interactive-plan__center">Center</button>
+  
+          <ul class="interactive-plan__level">
+          </ul>
+      </div>
+      <div id="map"></div>
+      <div class="interactive-plan__modal">
+          <button class="interactive-plan__modal__close">X</button>
+          <h3 class="interactive-plan__modal__title"></h3>
+          <p class="interactive-plan__modal__text"></p>
+      </div>
+  </div>
+  </body>
+</html>

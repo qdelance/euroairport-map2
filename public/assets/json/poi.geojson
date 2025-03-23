@@ -1,0 +1,377 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "CH EXP",
+        "type": "parking",
+        "level": 2
+      },
+      "geometry": {
+        "coordinates": [
+          7.53386072396782,
+          47.59904690780948
+        ],
+        "type": "Point"
+      },
+      "id": "POI-1"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "S2",
+        "type": "parking",
+        "level": 2
+      },
+      "geometry": {
+        "coordinates": [
+          7.5347711802145625,
+          47.597792331975
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "FR EXP",
+        "type": "parking",
+        "level": 2,
+        "description": "Parking express coté France"
+      },
+      "geometry": {
+        "coordinates": [
+          7.532261486255322,
+          47.60128371552668
+        ],
+        "type": "Point"
+      },
+      "id": "POI-2"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "F4",
+        "type": "parking",
+        "level": 2
+      },
+      "geometry": {
+        "coordinates": [
+          7.529031398829943,
+          47.60401683212285
+        ],
+        "type": "Point"
+      },
+      "id": "POI-3"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "F5",
+        "type": "parking",
+        "level": 2
+      },
+      "geometry": {
+        "coordinates": [
+          7.527923017311537,
+          47.60424636774499
+        ],
+        "type": "Point"
+      },
+      "id": "POI-4"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "La fourchette Suisse",
+        "type": "food",
+        "level": 5
+      },
+      "geometry": {
+        "coordinates": [
+          7.531772691294407,
+          47.598950129330746
+        ],
+        "type": "Point"
+      },
+      "id": "POI-5"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "La brasserie du 5ème",
+        "type": "food",
+        "level": 5
+      },
+      "geometry": {
+        "coordinates": [
+          7.531088425516913,
+          47.59999376085395
+        ],
+        "type": "Point"
+      },
+      "id": "POI-6"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Colombus",
+        "type": "food",
+        "level": 4
+      },
+      "geometry": {
+        "coordinates": [
+          7.52813337482246,
+          47.59935281680063
+        ],
+        "type": "Point"
+      },
+      "id": "POI-7"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Starbucks",
+        "level": 4,
+        "type": "food"
+      },
+      "geometry": {
+        "coordinates": [
+          7.5290459205814955,
+          47.59850063880711
+        ],
+        "type": "Point"
+      },
+      "id": "POI-8"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "duty_free",
+        "level": 4,
+        "description": "25 sur le plan"
+      },
+      "geometry": {
+        "coordinates": [
+          7.531628332365472,
+          47.59943801814086
+        ],
+        "type": "Point"
+      },
+      "id": "POI-9"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "duty_free",
+        "level": 4,
+        "description": "24 sur le plan"
+      },
+      "geometry": {
+        "coordinates": [
+          7.531524931447649,
+          47.59917930389312
+        ],
+        "type": "Point"
+      },
+      "id": "POI-10"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "level": 4,
+        "type": "duty_free",
+        "description": "Je crois que c'est 26 sur le plan"
+      },
+      "geometry": {
+        "coordinates": [
+          7.53239567570094,
+          47.598291225106976
+        ],
+        "type": "Point"
+      },
+      "id": "POI-11"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "level": 4,
+        "type": "toilets"
+      },
+      "geometry": {
+        "coordinates": [
+          7.532436490892422,
+          47.598241683574344
+        ],
+        "type": "Point"
+      },
+      "id": "POI-12"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "level": 4,
+        "type": "toilets"
+      },
+      "geometry": {
+        "coordinates": [
+          7.532129009215566,
+          47.59858847668056
+        ],
+        "type": "Point"
+      },
+      "id": "POI-13"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "toilets",
+        "level": 4
+      },
+      "geometry": {
+        "coordinates": [
+          7.531930370580227,
+          47.59881967080375
+        ],
+        "type": "Point"
+      },
+      "id": "POI-14"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "level": 4,
+        "type": "toilets"
+      },
+      "geometry": {
+        "coordinates": [
+          7.530824128956567,
+          47.600310168741714
+        ],
+        "type": "Point"
+      },
+      "id": "POI-15"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "toilets",
+        "level": 4
+      },
+      "geometry": {
+        "coordinates": [
+          7.529014619199586,
+          47.599038626825006
+        ],
+        "type": "Point"
+      },
+      "id": "POI-16"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "toilets",
+        "level": 4
+      },
+      "geometry": {
+        "coordinates": [
+          7.529324821953139,
+          47.59870101107404
+        ],
+        "type": "Point"
+      },
+      "id": "POI-17"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "toilets",
+        "level": 4
+      },
+      "geometry": {
+        "coordinates": [
+          7.527868221395039,
+          47.599429367810444
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "toilets",
+        "level": 4
+      },
+      "geometry": {
+        "coordinates": [
+          7.529027714687061,
+          47.597802233401666
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "toilets",
+        "level": 5
+      },
+      "geometry": {
+        "coordinates": [
+          7.531502657879685,
+          47.5999440099211
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "toilets",
+        "level": 5
+      },
+      "geometry": {
+        "coordinates": [
+          7.532109790569848,
+          47.599288386154484
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "level": 5,
+        "type": "duty_free",
+        "name": "Un autre Duty Free",
+        "description": "Environ point 32 sur le plan"
+      },
+      "geometry": {
+        "coordinates": [
+          7.531371244147039,
+          47.59994859060336
+        ],
+        "type": "Point"
+      },
+      "id": "POI-22"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "duty_free",
+        "level": 5,
+        "name": "Un Duty Free",
+        "description": "Point 31 sur le plan"
+      },
+      "geometry": {
+        "coordinates": [
+          7.53192090161275,
+          47.599212818419915
+        ],
+        "type": "Point"
+      },
+      "id": "POI-23"
+    }
+  ]
+}
