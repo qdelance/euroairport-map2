@@ -1,0 +1,55 @@
+name: Deploy
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+# https://github.com/actions/checkout
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+# https://github.com/actions/setup-node
+      - name: Setup Node
+        uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Configure vite
+        run: |
+          echo 'export default {
+            base: "/${{ github.event.repository.name }}/"
+          }' > vite.config.js
+
+      - name: Build project
+        run: npm run build
+
+# https://github.com/actions/upload-pages-artifact
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+# https://github.com/actions/deploy-pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
