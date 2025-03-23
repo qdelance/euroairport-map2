@@ -31,7 +31,7 @@
     },
     {
         "id": "parking",
-        "icon": "./icons/eap-parking-fr.png",
+        "icon": "./icons/eap-parking.png",
         "name": "Parkings"
     },
     {
