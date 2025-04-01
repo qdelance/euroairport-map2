@@ -33,10 +33,11 @@ Carto :
 * Voir si on garde la layer symbol avec ses limites (icônes PNG, trop d'images à charger sans sprite) ou si on revient aux Marker
 * Si choix marker : https://stackoverflow.com/a/55828753 ou https://stackoverflow.com/a/55917076
 * Si on converse symbol, voir si on garde layer symbol ou circle ou un mix des 2
+* piste = mix des 2 : https://github.com/mapbox/mapbox-gl-js/issues/3605#issuecomment-290330684
 
 Fermer popup sur une action : https://stackoverflow.com/a/59848998 ou https://stackoverflow.com/a/63006609
 
-Prévoir un ajustement de la carte sur les éléments affichés
+Prévoir un ajustement de la carte sur les éléments affichés : https://stackoverflow.com/questions/45770260/how-to-get-the-results-of-a-filtered-mapbox-layer et https://docs.mapbox.com/mapbox-gl-js/example/fitbounds/
 
 Intégrer avec Drupal (actuellement des (geo)json codés en dur)
 
