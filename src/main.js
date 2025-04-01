@@ -801,26 +801,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     });
 
-    /*document.querySelector('.interactive-plan__category').addEventListener('click', function(e) {
-        const category = e.target?.getAttribute('data-category');
-        if (category) {
-            currentCategory = category === currentCategory ? null : category;
-            document.querySelectorAll('.interactive-plan__category__btn').forEach(button => {
-                button.classList.toggle('-active', button.getAttribute('data-category') === currentCategory);
-            });
-  
-            applyFilters();
-  
-            const url = new URL(window.location);
-            if (currentCategory) {
-                url.searchParams.set('category', currentCategory);
-            } else {
-                url.searchParams.delete('category');
-            }
-            history.replaceState({}, '', url);
-        }
-    });*/
-
     function handleCategoryButtonClick(e) {
         const categoryId = e.target?.getAttribute('data-category');
         console.log('QDE, handleCategoryButtonClick categoryId', categoryId)
