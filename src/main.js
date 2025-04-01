@@ -148,52 +148,70 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             let liElement = document.createElement("li");
 
+            let imgElement = document.createElement("img");
+            imgElement.src = currentCategory.icon;
+
+            let spanElement = document.createElement("span");
+            spanElement.appendChild(imgElement);
+
             let buttonElement = document.createElement("button");
-            let textNode = document.createTextNode('BACK ' + currentCategory.name);
+            let textNode = document.createTextNode(currentCategory.name + ' (retour)');
             buttonElement.classList.add("interactive-plan__category__btn");
             if (currentCategory.parent) {
                 buttonElement.dataset.category = currentCategory.parent;
             }
             
             buttonElement.addEventListener('click', handleCategoryButtonClick);
+            buttonElement.appendChild(spanElement);
             buttonElement.appendChild(textNode);
 
             liElement.append(buttonElement);
             ulElement.append(liElement);
 
-            for (const category of childCategories) {
-                const categoryId = category.id;
-                const categoryName = category.name ?? 'Unknown';
-                const categoryIcon = category.icon;
-                let liElement = document.createElement("li", { is: "expanding-list" });
-    
-                let imgElement = document.createElement("img");
-                imgElement.src = categoryIcon;
-    
-                let spanElement = document.createElement("span");
-                spanElement.appendChild(imgElement);
-    
-                let buttonElement = document.createElement("button");
-                const textNode = document.createTextNode(categoryName);
-                buttonElement.classList.add("interactive-plan__category__btn");
-                buttonElement.dataset.category = categoryId;
-                buttonElement.addEventListener('click', handleCategoryButtonClick);
-    
-                buttonElement.appendChild(spanElement);
-                buttonElement.appendChild(textNode);
-    
-                liElement.append(buttonElement);
-    
+            if (childCategories.length > 0) {
+                let liElement = document.createElement("li");
+                let h3Element = document.createElement("h3");
+                let textNode = document.createTextNode('Sous catégories');
+                h3Element.appendChild(textNode);
+                liElement.append(h3Element);
                 ulElement.append(liElement);
+
+                for (const category of childCategories) {
+                    const categoryId = category.id;
+                    const categoryName = category.name ?? 'Unknown';
+                    const categoryIcon = category.icon;
+                    let liElement = document.createElement("li", { is: "expanding-list" });
+        
+                    let imgElement = document.createElement("img");
+                    imgElement.src = categoryIcon;
+        
+                    let spanElement = document.createElement("span");
+                    spanElement.appendChild(imgElement);
+        
+                    let buttonElement = document.createElement("button");
+                    const textNode = document.createTextNode(categoryName);
+                    buttonElement.classList.add("interactive-plan__category__btn");
+                    buttonElement.dataset.category = categoryId;
+                    buttonElement.addEventListener('click', handleCategoryButtonClick);
+        
+                    buttonElement.appendChild(spanElement);
+                    buttonElement.appendChild(textNode);
+        
+                    liElement.append(buttonElement);
+        
+                    ulElement.append(liElement);
+                }
             }
 
             let selectedPOIs = pois.features.filter(poi => poi.properties?.category === currentCategory.id);
             // TODO trier par étage
-            console.log('QDE, selectedPOIs', selectedPOIs);
+            // console.log('QDE, selectedPOIs', selectedPOIs);
             if (selectedPOIs.length > 0) {
                 let liElement = document.createElement("li");
+                let h3Element = document.createElement("h3");
                 let textNode = document.createTextNode('Liste des POIs');
-                liElement.append(textNode);
+                h3Element.appendChild(textNode);
+                liElement.append(h3Element);
                 ulElement.append(liElement);
                 for (const poi of selectedPOIs) {
                     const poiFID = poi.properties.fid;
@@ -216,11 +234,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                     liElement.append(buttonElement);
                     ulElement.append(liElement);
                 }
-            } else {
-                let liElement = document.createElement("li");
-                const textNode = document.createTextNode('Aucun POI de cette catégorie');
-                liElement.append(textNode);
-                ulElement.append(liElement);
             }
         }
     }
