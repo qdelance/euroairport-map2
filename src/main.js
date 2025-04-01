@@ -7,7 +7,7 @@ import { Protocol } from "pmtiles";
 
 import { layers, namedFlavor } from '@protomaps/basemaps';
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
 
     // Position initiale de la carte + emprise maximum autorisée
     // On interdit le zoom trop loin en dehors de l'aéroport
@@ -18,16 +18,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // Variables globales ci dessous
     let map;
 
-    let levels = [];
-
     let poiLoaded = false;
     let pois = [];
     let poiLoadedImages = [];
 
-    let categories = [];
-
+    let levels = [];
     let currentLevel = null;
+
+    let categories = [];
     let currentCategory = null;
+
+    let currentPopup = null;
 
     // Structure commune entre tous les styles Protomaps
     // Valeurs possibles pour flavor dark, white, grayscale, light
@@ -96,8 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Créé le sélecteur de catégories de POI à partir de la liste de catégories découverte dans la liste des POI
-    async function createCategorySwitcherControl() {
+    async function loadCategories() {
         try {
             const url = 'json/eap-categories.json';
             let response = await fetch(url);
@@ -105,34 +105,122 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error(response.statusText);
             categories = await response.json();
             console.log("categories", categories);
-            const ulElement = document.querySelector('.interactive-plan__category');
-            for (const category of categories) {
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    async function updateCategorySwitcherControl() {
+        const ulElement = document.querySelector('.interactive-plan__category');
+        ulElement.innerHTML = "";
+
+        if (currentCategory == null) {
+
+            const rootCategories = categories.filter(c => !c.parent);
+            for (const category of rootCategories) {
                 const categoryId = category.id;
                 const categoryName = category.name ?? 'Unknown';
                 const categoryIcon = category.icon;
                 let liElement = document.createElement("li", { is: "expanding-list" });
-
+    
                 let imgElement = document.createElement("img");
                 imgElement.src = categoryIcon;
-
+    
                 let spanElement = document.createElement("span");
                 spanElement.appendChild(imgElement);
-
+    
                 let buttonElement = document.createElement("button");
                 const textNode = document.createTextNode(categoryName);
                 buttonElement.classList.add("interactive-plan__category__btn");
                 buttonElement.dataset.category = categoryId;
                 buttonElement.addEventListener('click', handleCategoryButtonClick);
-
+    
                 buttonElement.appendChild(spanElement);
                 buttonElement.appendChild(textNode);
-
+    
                 liElement.append(buttonElement);
-
+    
                 ulElement.append(liElement);
             }
-        } catch (err) {
-            console.error(err);
+        } else {
+            const childCategories = categories.filter(c => c.parent === currentCategory.id);
+
+            let liElement = document.createElement("li");
+
+            let buttonElement = document.createElement("button");
+            let textNode = document.createTextNode('BACK ' + currentCategory.name);
+            buttonElement.classList.add("interactive-plan__category__btn");
+            if (currentCategory.parent) {
+                buttonElement.dataset.category = currentCategory.parent;
+            }
+            
+            buttonElement.addEventListener('click', handleCategoryButtonClick);
+            buttonElement.appendChild(textNode);
+
+            liElement.append(buttonElement);
+            ulElement.append(liElement);
+
+            for (const category of childCategories) {
+                const categoryId = category.id;
+                const categoryName = category.name ?? 'Unknown';
+                const categoryIcon = category.icon;
+                let liElement = document.createElement("li", { is: "expanding-list" });
+    
+                let imgElement = document.createElement("img");
+                imgElement.src = categoryIcon;
+    
+                let spanElement = document.createElement("span");
+                spanElement.appendChild(imgElement);
+    
+                let buttonElement = document.createElement("button");
+                const textNode = document.createTextNode(categoryName);
+                buttonElement.classList.add("interactive-plan__category__btn");
+                buttonElement.dataset.category = categoryId;
+                buttonElement.addEventListener('click', handleCategoryButtonClick);
+    
+                buttonElement.appendChild(spanElement);
+                buttonElement.appendChild(textNode);
+    
+                liElement.append(buttonElement);
+    
+                ulElement.append(liElement);
+            }
+
+            let selectedPOIs = pois.features.filter(poi => poi.properties?.category === currentCategory.id);
+            // TODO trier par étage
+            console.log('QDE, selectedPOIs', selectedPOIs);
+            if (selectedPOIs.length > 0) {
+                let liElement = document.createElement("li");
+                let textNode = document.createTextNode('Liste des POIs');
+                liElement.append(textNode);
+                ulElement.append(liElement);
+                for (const poi of selectedPOIs) {
+                    const poiFID = poi.properties.fid;
+                    const poiName = poi.properties.name;
+                    const poiLevel = poi.properties.level;
+                    var poiLongitude = poi.geometry.coordinates[0];
+                    var poiLatitude = poi.geometry.coordinates[1];
+                    let liElement = document.createElement("li");
+
+                    let buttonElement = document.createElement("button");
+                    textNode = document.createTextNode(`${poiName} => étage ${poiLevel}`);
+                    buttonElement.classList.add("interactive-plan__poi__btn");
+                    buttonElement.dataset.fid = poiFID;
+                    buttonElement.dataset.longitude = poiLongitude;
+                    buttonElement.dataset.latitude = poiLatitude;
+                    buttonElement.dataset.level = poiLevel;
+                    buttonElement.addEventListener('click', handlePOIButtonClick);
+                    buttonElement.appendChild(textNode);
+
+                    liElement.append(buttonElement);
+                    ulElement.append(liElement);
+                }
+            } else {
+                let liElement = document.createElement("li");
+                const textNode = document.createTextNode('Aucun POI de cette catégorie');
+                liElement.append(textNode);
+                ulElement.append(liElement);
+            }
         }
     }
 
@@ -206,7 +294,8 @@ document.addEventListener('DOMContentLoaded', function () {
     createLevelSwitcherControl();
     // Chargement des catégories de POI, chargement des icônes associées
     // et création du switcher dans la barre de gauche
-    createCategorySwitcherControl();
+    await loadCategories();
+    updateCategorySwitcherControl();
 
     // Gestion du switcher de theme dark/light
     let currentTheme = getSystemDarkLightTheme();
@@ -361,7 +450,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function hideAllLevels() {
         for (const level of levels) {
-            console.log(`On cache le niveau ${level}`);
+            // console.log(`On cache le niveau ${level}`);
             const layerId = 'eap-layer-level' + level;
             map.setLayoutProperty(layerId, 'visibility', 'none');
             map.setLayoutProperty(layerId + '-extrusion', 'visibility', 'none');
@@ -369,13 +458,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function applyFilters() {
-        console.log(`On applique les filtres currentCategory=${currentCategory} currentLevel=${currentLevel}`)
+
+        // Il est possible que le changement de filtre fasse disparaître le POI actif (s'il y en a 1)
+        // avec popup visible
+        // Dans le doute on ferme la popup pour éviter d'avoir une popup sans POI visible associé
+        if (currentPopup) {
+            currentPopup.remove();
+        }
+        
+        console.log(`On applique les filtres currentCategory=${currentCategory} currentLevel=${currentLevel}`, currentCategory, currentLevel)
         loadPOIGeoJSON();
 
         // Ici on gère l'affichage des POI
         if (currentCategory != null && currentLevel == null) {
             console.log(`Filtrage des POI par la catégorie ${currentCategory}`);
-            map.setFilter('eap-layer-poi', ['==', 'category', currentCategory]);
+            map.setFilter('eap-layer-poi', ['==', 'category', currentCategory.id]);
             map.setLayoutProperty('eap-layer-poi', 'visibility', 'visible');
         } else if (currentCategory == null && currentLevel != null) {
             console.log(`Filtrage des POI par l'étage ${currentLevel}`);
@@ -386,7 +483,7 @@ document.addEventListener('DOMContentLoaded', function () {
             map.setFilter('eap-layer-poi', [
                 "all",
                 ['==', 'level', currentLevel],
-                ['==', 'category', currentCategory]
+                ['==', 'category', currentCategory.id]
             ]
             );
             map.setLayoutProperty('eap-poi-layer', 'visibility', 'visible');
@@ -597,34 +694,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
 
                 map.on('click', layerId, (e) => {
+
+                    // TODO si on clique sur la carte à haut niveau de zoom
+                    // on peut en fait cliquer sur plusieurs features/POI d'un coup
+                    // donc on pourrait vouloir mettre ces X features dans la même popup
+                    // Pour le moment je ne prends que la première
+
                     const coordinates = e.features[0].geometry.coordinates.slice();
-                    const name = e.features[0].properties.name;
-                    const level = e.features[0].properties.level;
-                    const description = e.features[0].properties.description;
-
-                    // TODO handle multiple features here
-                    /*console.log('click', e);
-                    if (e.features.length > 1)
-                        console.warn('More than one feature, to be handled');
-                    }*/
-
-                    let popupContent = `<h3>${name}</h3><p><strong>Etage : ${level}</strong></p>`;
-                    if (description) {
-                        popupContent += `<p>${description}</p>`
-                    } else {
-                        popupContent += '<p>Pas de description</p>'
-                    }
-
                     map.flyTo({
                         center: coordinates,
-                        zoom: 20,
+                        zoom: 17,
                         essential: true
                     });
 
-                    new maplibregl.Popup()
+                    if (currentPopup) {
+                        currentPopup.remove();
+                    }
+                    currentPopup = new maplibregl.Popup()
                         .setLngLat(coordinates)
-                        .setHTML(popupContent)
-                        .addTo(map);
+                        .setHTML(getPopupContentFromFeature(e.features[0]));
+                    currentPopup.addTo(map);
+
                 });
 
                 poiLoaded = true;
@@ -732,23 +822,79 @@ document.addEventListener('DOMContentLoaded', function () {
     });*/
 
     function handleCategoryButtonClick(e) {
-        const category = e.target?.getAttribute('data-category');
-        if (category) {
-            currentCategory = category === currentCategory ? null : category;
-            document.querySelectorAll('.interactive-plan__category__btn').forEach(button => {
-                button.classList.toggle('-active', button.getAttribute('data-category') === currentCategory);
-            });
-
-            applyFilters();
-
-            const url = new URL(window.location);
+        const categoryId = e.target?.getAttribute('data-category');
+        console.log('QDE, handleCategoryButtonClick categoryId', categoryId)
+        if (categoryId) {
+            currentCategory = categories.find(c => c.id === categoryId)
+            console.log('QDE, handleCategoryButtonClick e', e)
+            console.log('QDE, handleCategoryButtonClick currentCategory', currentCategory)
             if (currentCategory) {
-                url.searchParams.set('category', currentCategory);
+                /*currentCategory = category === currentCategory ? null : category;
+                document.querySelectorAll('.interactive-plan__category__btn').forEach(button => {
+                    button.classList.toggle('-active', button.getAttribute('data-category') === currentCategory);
+                });*/
+
+
+
+                /*const url = new URL(window.location);
+                if (currentCategory) {
+                    url.searchParams.set('category', currentCategory);
+                } else {
+                    url.searchParams.delete('category');
+                }
+                history.replaceState({}, '', url);*/
             } else {
-                url.searchParams.delete('category');
+                console.log('QDE, handleCategoryButtonClick, pas de categorie', e)
             }
-            history.replaceState({}, '', url);
+        } else {
+            currentCategory = null;
         }
+        applyFilters();
+        updateCategorySwitcherControl();
+    }
+
+    function handlePOIButtonClick(e) {
+        const fid = e.target?.getAttribute('data-fid');
+        // const longitude = e.target?.getAttribute('data-latitude');
+        // const latitude = e.target?.getAttribute('data-latitude');
+        const level = e.target?.getAttribute('data-level');
+
+        // Attention on peut avoir des doublons
+        // https://github.com/mapbox/mapbox-gl-js/issues/3147#issuecomment-244844915
+        const selectedPOIs = map.querySourceFeatures('eap-source-poi', {
+            filter: ['==', ["get", "fid"], ["to-number", fid]]
+        });
+
+        const poi = pois.features.find(poi => poi.properties.fid == fid)
+        map.flyTo({
+            center: poi.geometry.coordinates,
+            zoom: 17,
+            essential: true
+        });
+
+        if (currentPopup) {
+            currentPopup.remove();
+        }
+        currentPopup = new maplibregl.Popup()
+            .setLngLat(poi.geometry.coordinates)
+            .setHTML(getPopupContentFromFeature(poi));
+        currentPopup.addTo(map);
+    }
+
+    function getPopupContentFromFeature(f) {
+        const name = f.properties.name;
+        const level = f.properties.level;
+        const description = f.properties.description;
+
+
+        let popupContent = `<h3>${name}</h3><p><strong>Etage : ${level}</strong></p>`;
+        if (description) {
+            popupContent += `<p>${description}</p>`
+        } else {
+            popupContent += '<p>Pas de description</p>'
+        }
+
+        return popupContent;
     }
 
 });

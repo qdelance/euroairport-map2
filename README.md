@@ -52,3 +52,5 @@ Documenter l'extraction des tuiles Protomaps
 Documenter l'usage Vite et Github pages :
 * https://til.simonwillison.net/gis/pmtiles
 * https://til.simonwillison.net/github-actions/vite-github-pages
+
+Positionner un ID sur chaque feature dans QGis : https://gis.stackexchange.com/a/132859
