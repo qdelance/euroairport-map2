@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     let poiLoaded = false;
     let pois = [];
     let poiLoadedImages = [];
+    let levelGeoJSONloaded = []; // level IDs
 
     let levels = [];
     let currentLevel = null;
@@ -77,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             let response = await fetch(url);
             if (!response.ok)
                 throw new Error(response.statusText);
-            let levels = await response.json();
+            levels = await response.json();
             console.log("levels", levels);
             const ulElement = document.querySelector('.interactive-plan__level');
             for (const level of levels) {
@@ -449,9 +450,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     }*/
 
     function hideAllLevels() {
-        for (const level of levels) {
-            // console.log(`On cache le niveau ${level}`);
-            const layerId = 'eap-layer-level' + level;
+        for (const levelId of levelGeoJSONloaded) {
+            // console.log(`On cache le niveau ${levelId}`);
+            const layerId = 'eap-layer-level' + levelId;
             map.setLayoutProperty(layerId, 'visibility', 'none');
             map.setLayoutProperty(layerId + '-extrusion', 'visibility', 'none');
         }
@@ -466,52 +467,50 @@ document.addEventListener('DOMContentLoaded', async function () {
             currentPopup.remove();
         }
         
-        console.log(`On applique les filtres currentCategory=${currentCategory} currentLevel=${currentLevel}`, currentCategory, currentLevel)
+        console.log(`On applique les filtres currentCategory=${currentCategory?.id} currentLevel=${currentLevel?.id}`, currentLevel)
         loadPOIGeoJSON();
-
-        // Ici on gère l'affichage des POI
-        if (currentCategory != null && currentLevel == null) {
-            console.log(`Filtrage des POI par la catégorie ${currentCategory}`);
-            map.setFilter('eap-layer-poi', ['==', 'category', currentCategory.id]);
-            map.setLayoutProperty('eap-layer-poi', 'visibility', 'visible');
-        } else if (currentCategory == null && currentLevel != null) {
-            console.log(`Filtrage des POI par l'étage ${currentLevel}`);
-            map.setFilter('eap-layer-poi', ['==', 'level', currentLevel]);
-            map.setLayoutProperty('eap-layer-poi', 'visibility', 'visible');
-        } else if (currentCategory != null && currentLevel != null) {
-            console.log(`Filtrage des POI par l'étage ${currentLevel} et la catégorie ${currentCategory}`);
-            map.setFilter('eap-layer-poi', [
-                "all",
-                ['==', 'level', currentLevel],
-                ['==', 'category', currentCategory.id]
-            ]
-            );
-            map.setLayoutProperty('eap-poi-layer', 'visibility', 'visible');
-        } else {
-            console.log(`Pas de filtrage des POI`);
-            map.setFilter('eap-layer-poi', null);
-            map.setLayoutProperty('eap-poi-layer', 'visibility', 'visible');
-        }
 
         // Ici on gère l'affichage (ou non) de l'étage
         hideAllLevels();
         if (currentLevel != null) {
-            console.log(`Affichage de l'étage ${currentLevel}`);
+            console.log(`Affichage de l'étage ${currentLevel.id}`);
             loadLevelGeoJSON(currentLevel)
-            const layerId = 'eap-layer-level' + currentLevel;
+            const layerId = 'eap-layer-level' + currentLevel.id;
             map.setLayoutProperty(layerId, 'visibility', 'visible');
             map.setLayoutProperty(layerId + '-extrusion', 'visibility', 'visible');
+        }
+
+        // Ici on gère l'affichage des POI
+        map.setLayoutProperty('eap-layer-poi', 'visibility', 'visible');
+        if (currentCategory != null && currentLevel == null) {
+            console.log(`Filtrage des POI par la catégorie ${currentCategory.id}`);
+            map.setFilter('eap-layer-poi', ['==', 'category', currentCategory.id]);
+        } else if (currentCategory == null && currentLevel != null) {
+            console.log(`Filtrage des POI par l'étage ${currentLevel.id}`);
+            map.setFilter('eap-layer-poi', ['==', 'level', currentLevel.id]);
+        } else if (currentCategory != null && currentLevel != null) {
+            console.log(`Filtrage des POI par l'étage ${currentLevel.id} et la catégorie ${currentCategory.id}`);
+            map.setFilter('eap-layer-poi', [
+                "all",
+                ['==', 'level', currentLevel.id],
+                ['==', 'category', currentCategory.id]
+            ]
+            );
+        } else {
+            console.log(`Pas de filtrage des POI`);
+            map.setFilter('eap-layer-poi', null);
         }
     }
 
     // Chargement d'un GeoJSON décrivant l'étage sélectionné
     function loadLevelGeoJSON(level) {
-        console.log('loadLevelGeoJSON', level)
-        const url = `json/eap-level_${level}.geojson`;
+        const levelId = level.id;
+        console.log('loadLevelGeoJSON', levelId)
+        const url = `json/eap-level_${levelId}.geojson`;
 
-        if (!levels.includes(level)) {
-            console.log(`Level ${level} never loaded => requesting`);
-            levels.push(level);
+        if (!levelGeoJSONloaded.includes(levelId)) {
+            console.log(`Level ${levelId} never loaded => requesting`);
+            levelGeoJSONloaded.push(levelId);
 
             // TODO passer en try/catch + await pour harmoniser avec chargement des catégories
             fetch(url)
@@ -519,8 +518,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 .then(data => {
                     if (!data) return;
 
-                    const sourceId = 'eap-source-level' + level;
-                    const layerId = 'eap-layer-level' + level;
+                    const sourceId = 'eap-source-level' + levelId;
+                    const layerId = 'eap-layer-level' + levelId;
                     map.addSource(sourceId, {
                         'type': 'geojson',
                         'data': data
@@ -637,8 +636,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                     } else {
                         console.warn(`Le POI ${poi.properties.name} a une catégorie inconnue ${poi.properties.category}`);
                     }
-
-
                 }
 
                 const sourceId = 'eap-source-poi';
@@ -746,19 +743,21 @@ document.addEventListener('DOMContentLoaded', async function () {
     }*/
 
     document.querySelector('.interactive-plan__level').addEventListener('click', function (e) {
-        let level = e.target?.getAttribute('data-level');
-        level = parseInt(level, 10);
-        if (level != null) {
-            currentLevel = level === currentLevel ? null : level;
+        let levelId = e.target?.getAttribute('data-level');
+        // level = parseInt(level, 10);
+        if (levelId != null) {
+            /*currentLevel = level === currentLevel ? null : level;
             document.querySelectorAll('.interactive-plan__level__btn').forEach(button => {
                 button.classList.toggle('-active', button.getAttribute('data-level') == currentLevel);
-            });
-
+            });*/
+            currentLevel = levels.find(l => l.id == levelId);
+            console.log('QDE, click level levels', levels);
+            console.log('QDE, click level currentLevel', currentLevel);
             applyFilters();
 
             const url = new URL(window.location);
             if (currentLevel) {
-                url.searchParams.set('level', currentLevel);
+                url.searchParams.set('level', currentLevel.id);
             } else {
                 url.searchParams.delete('level');
             }
@@ -828,6 +827,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         } else {
             currentCategory = null;
+            currentLevel = null;
         }
         applyFilters();
         updateCategorySwitcherControl();
@@ -837,7 +837,11 @@ document.addEventListener('DOMContentLoaded', async function () {
         const fid = e.target?.getAttribute('data-fid');
         // const longitude = e.target?.getAttribute('data-latitude');
         // const latitude = e.target?.getAttribute('data-latitude');
-        const level = e.target?.getAttribute('data-level');
+        const levelId = e.target?.getAttribute('data-level');
+        currentLevel = levels.find(l => l.id == levelId);
+        console.log('QDE, handlePOIButtonClick levels', levels);
+        console.log('QDE, handlePOIButtonClick currentLevel', currentLevel);
+        applyFilters();
 
         // Attention on peut avoir des doublons
         // https://github.com/mapbox/mapbox-gl-js/issues/3147#issuecomment-244844915
