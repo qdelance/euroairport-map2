@@ -25,6 +25,8 @@ npm run build # en prod => c'est ce qui est fait dans Github pages, cf contenu `
 
 Gestion des catégories à plusieurs niveaux
 
+Mettre le lien GeoJSON de l'état dans eap-levels.json
+
 Ergonomie générale des filtres (contenu barre de gauche)
 
 Passage de paramètres dans l'URL pour arriver sur le plan avec catégorie ou niveau ou POI préselectionné
@@ -40,6 +42,8 @@ Fermer popup sur une action : https://stackoverflow.com/a/59848998 ou https://st
 Prévoir un ajustement de la carte sur les éléments affichés : https://stackoverflow.com/questions/45770260/how-to-get-the-results-of-a-filtered-mapbox-layer et https://docs.mapbox.com/mapbox-gl-js/example/fitbounds/
 
 Intégrer avec Drupal (actuellement des (geo)json codés en dur)
+
+## A documenter
 
 Documenter le setStyle https://github.com/maplibre/maplibre-gl-js/issues/2587 + https://docs.mapbox.com/mapbox-gl-js/example/style-switch/
 

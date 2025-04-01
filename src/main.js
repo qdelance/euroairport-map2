@@ -122,6 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
               const textNode = document.createTextNode(categoryName);
               buttonElement.classList.add("interactive-plan__category__btn");
               buttonElement.dataset.category = categoryId;
+              buttonElement.addEventListener('click', handleCategoryButtonClick);
+
               buttonElement.appendChild(spanElement);
               buttonElement.appendChild(textNode);
               
@@ -709,7 +711,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
 
-  document.querySelector('.interactive-plan__category').addEventListener('click', function(e) {
+  /*document.querySelector('.interactive-plan__category').addEventListener('click', function(e) {
       const category = e.target?.getAttribute('data-category');
       if (category) {
           currentCategory = category === currentCategory ? null : category;
@@ -727,5 +729,26 @@ document.addEventListener('DOMContentLoaded', function() {
           }
           history.replaceState({}, '', url);
       }
-  });
+  });*/
+
+  function handleCategoryButtonClick(e) {
+    const category = e.target?.getAttribute('data-category');
+    if (category) {
+        currentCategory = category === currentCategory ? null : category;
+        document.querySelectorAll('.interactive-plan__category__btn').forEach(button => {
+            button.classList.toggle('-active', button.getAttribute('data-category') === currentCategory);
+        });
+
+        applyFilters();
+
+        const url = new URL(window.location);
+        if (currentCategory) {
+            url.searchParams.set('category', currentCategory);
+        } else {
+            url.searchParams.delete('category');
+        }
+        history.replaceState({}, '', url);
+    }
+}
+
 });
