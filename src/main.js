@@ -204,35 +204,56 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
 
             let selectedPOIs = pois.features.filter(poi => poi.properties?.category === currentCategory.id);
-            // TODO trier par étage
-            // console.log('QDE, selectedPOIs', selectedPOIs);
+
             if (selectedPOIs.length > 0) {
+                // console.log('QDE, selectedPOIs', selectedPOIs);
+                let levelsOfselectedPOI = selectedPOIs.map(poi => {
+                    let levelId = poi.properties.level;
+                    let level = levels.find(level => level.id === levelId);
+                    return level;
+                });
+                let uniqLevelsOfselectedPOI = levelsOfselectedPOI.filter((value, index, array) => array.indexOf(value) === index);
+                let sortedUniqLevelsOfselectedPOI = uniqLevelsOfselectedPOI.sort();
+                // console.log('QDE, sortedUniqLevelsOfselectedPOI', sortedUniqLevelsOfselectedPOI);
+
                 let liElement = document.createElement("li");
                 let h3Element = document.createElement("h3");
                 let textNode = document.createTextNode('Liste des POIs');
                 h3Element.appendChild(textNode);
                 liElement.append(h3Element);
                 ulElement.append(liElement);
-                for (const poi of selectedPOIs) {
-                    const poiFID = poi.properties.fid;
-                    const poiName = poi.properties.name;
-                    const poiLevel = poi.properties.level;
-                    var poiLongitude = poi.geometry.coordinates[0];
-                    var poiLatitude = poi.geometry.coordinates[1];
+
+                for (let level of sortedUniqLevelsOfselectedPOI) {
                     let liElement = document.createElement("li");
-
-                    let buttonElement = document.createElement("button");
-                    textNode = document.createTextNode(`${poiName} => étage ${poiLevel}`);
-                    buttonElement.classList.add("interactive-plan__poi__btn");
-                    buttonElement.dataset.fid = poiFID;
-                    buttonElement.dataset.longitude = poiLongitude;
-                    buttonElement.dataset.latitude = poiLatitude;
-                    buttonElement.dataset.level = poiLevel;
-                    buttonElement.addEventListener('click', handlePOIButtonClick);
-                    buttonElement.appendChild(textNode);
-
-                    liElement.append(buttonElement);
+                    let h4Element = document.createElement("h4");
+                    let textNode = document.createTextNode(`Etage ${level.name}`);
+                    h4Element.appendChild(textNode);
+                    liElement.append(h4Element);
                     ulElement.append(liElement);
+
+                    let levelFilteredPOIs = selectedPOIs.filter(poi => poi.properties.level === level.id);
+                    for (const poi of levelFilteredPOIs) {
+
+                        const poiFID = poi.properties.fid;
+                        const poiName = poi.properties.name;
+                        const poiLevel = poi.properties.level;
+                        var poiLongitude = poi.geometry.coordinates[0];
+                        var poiLatitude = poi.geometry.coordinates[1];
+                        let liElement = document.createElement("li");
+    
+                        let buttonElement = document.createElement("button");
+                        textNode = document.createTextNode(`${poiName} => étage ${poiLevel}`);
+                        buttonElement.classList.add("interactive-plan__poi__btn");
+                        buttonElement.dataset.fid = poiFID;
+                        buttonElement.dataset.longitude = poiLongitude;
+                        buttonElement.dataset.latitude = poiLatitude;
+                        buttonElement.dataset.level = poiLevel;
+                        buttonElement.addEventListener('click', handlePOIButtonClick);
+                        buttonElement.appendChild(textNode);
+    
+                        liElement.append(buttonElement);
+                        ulElement.append(liElement);
+                    }
                 }
             }
         }
