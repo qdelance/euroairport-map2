@@ -1,18 +1,66 @@
 [
     {
+        "id": "bar-restaurant",
+        "icon": "./icons/eap-bar.png",
+        "name": "Bars, restaurants"
+    },
+    {
         "id": "bar",
+        "parent": "bar-restaurant",
         "icon": "./icons/eap-bar.png",
         "name": "Bars"
     },
     {
         "id": "restaurant",
+        "parent": "bar-restaurant",
         "icon": "./icons/eap-restaurant.png",
         "name": "Restaurants"
     },
     {
+        "id": "shop-dutyfree",
+        "icon": "./icons/eap-shop.png",
+        "name": "Boutiques et shopping"
+    },
+    {
+        "id": "shop",
+        "parent": "shop-dutyfree",
+        "icon": "./icons/eap-shop.png",
+        "name": "Commerce"
+    },
+    {
+        "id": "dutyfree",
+        "parent": "shop-dutyfree",
+        "icon": "./icons/eap-dutyfree.png",
+        "name": "Duty free"
+    },
+    {
+        "id": "must",
+        "icon": "./icons/eap-joker.png",
+        "name": "Les indispensables"
+    },
+    {
         "id": "toilets",
+        "parent": "must",
         "icon": "./icons/eap-toilets.png",
         "name": "Toilettes"
+    },
+    {
+        "id": "info",
+        "parent": "must",
+        "icon": "./icons/eap-joker.png",
+        "name": "Points info"
+    },
+    {
+        "id": "change",
+        "parent": "must",
+        "icon": "./icons/eap-joker.png",
+        "name": "Change"
+    },
+    {
+        "id": "mixed",
+        "parent": "must",
+        "icon": "./icons/eap-joker.png",
+        "name": "Divers"
     },
     {
         "id": "gate",
@@ -28,6 +76,29 @@
         "id": "check",
         "icon": "./icons/eap-check.png",
         "name": "Guichets d'enregistrement"
+    },
+    {
+        "id": "access",
+        "icon": "./icons/eap-access.png",
+        "name": "Accès, escaliers, ascenseurs"
+    },
+    {
+        "id": "stairs",
+        "parent": "access",
+        "icon": "./icons/eap-stairs.png",
+        "name": "Escaliers"
+    },
+    {
+        "id": "escalator",
+        "parent": "access",
+        "icon": "./icons/eap-escalator.png",
+        "name": "Escalators"
+    },
+    {
+        "id": "elevator",
+        "parent": "access",
+        "icon": "./icons/eap-elevator.png",
+        "name": "Ascenseurs"
     },
     {
         "id": "parking",
