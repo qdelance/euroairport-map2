@@ -13,8 +13,8 @@
     "vite": "^6.2.0"
   },
   "dependencies": {
-    "@protomaps/basemaps": "^5.0.1",
-    "maplibre-gl": "^5.2.0",
+    "@protomaps/basemaps": "^5.1.0",
+    "maplibre-gl": "^5.3.0",
     "pmtiles": "^4.3.0"
   }
 }
