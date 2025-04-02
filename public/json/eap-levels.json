@@ -1,26 +1,32 @@
 [
     {
         "id": 0,
-        "name": "0"
+        "name": "0",
+        "geojson": "./json/eap-level_0.geojson"
     },
     {
         "id": 2,
-        "name": "2 - Arrivées"
+        "name": "2 - Arrivées",
+        "geojson": "./json/eap-level_2.geojson"
     },
     {
         "id": 3,
-        "name": "3 - Départs"
+        "name": "3 - Départs",
+        "geojson": "./json/eap-level_3.geojson"
     },
     {
         "id": 4,
-        "name": "4 - Embarquement"
+        "name": "4 - Embarquement",
+        "geojson": "./json/eap-level_4.geojson"
     },
     {
         "id": 5,
-        "name": "5"
+        "name": "5",
+        "geojson": "./json/eap-level_5.geojson"
     },
     {
         "id": 6,
-        "name": "6"
+        "name": "6",
+        "geojson": "./json/eap-level_6.geojson"
     }
 ]

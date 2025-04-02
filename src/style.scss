@@ -123,43 +123,6 @@ body {
 			display: block;
 		}
 	}
-
-	&__modal {
-		display: none;
-		position: absolute;
-		left: 0;
-		z-index: 9;
-		width: 25rem;
-		max-width: calc(100% - 80px);
-		border-radius: 10px;
-		background-color: #fff;
-		box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.15);
-		transition: 0.3s;
-		padding: 2.5rem;
-
-		&__close {
-			position: absolute;
-			top: 1rem;
-			right: 1rem;
-		}
-
-		&__title {
-			margin: 0 0 1rem;
-			font-size: 2rem;
-		}
-
-		&.-active {
-			display: block;
-			left: 40px;
-			bottom: 40px;
-
-			@media screen and (min-width: 1024px) {
-				left: 240px;
-				top: 40px;
-				bottom: unset;
-			}
-		}
-	}
 }
 
 * {

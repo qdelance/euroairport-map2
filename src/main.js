@@ -232,27 +232,34 @@ document.addEventListener('DOMContentLoaded', async function () {
                     ulElement.append(liElement);
 
                     let levelFilteredPOIs = selectedPOIs.filter(poi => poi.properties.level === level.id);
-                    for (const poi of levelFilteredPOIs) {
-
+                    let sortedLevelFilteredPOIs = levelFilteredPOIs.sort((a, b) => a.properties.name.toLowerCase().localeCompare(b.properties.name.toLowerCase()));
+                    // console.log('QDE, sortedLevelFilteredPOIs', sortedLevelFilteredPOIs);
+                    for (const poi of sortedLevelFilteredPOIs) {
                         const poiFID = poi.properties.fid;
                         const poiName = poi.properties.name;
                         const poiLevel = poi.properties.level;
-                        var poiLongitude = poi.geometry.coordinates[0];
-                        var poiLatitude = poi.geometry.coordinates[1];
-                        let liElement = document.createElement("li");
-    
-                        let buttonElement = document.createElement("button");
-                        textNode = document.createTextNode(`${poiName} => étage ${poiLevel}`);
-                        buttonElement.classList.add("interactive-plan__poi__btn");
-                        buttonElement.dataset.fid = poiFID;
-                        buttonElement.dataset.longitude = poiLongitude;
-                        buttonElement.dataset.latitude = poiLatitude;
-                        buttonElement.dataset.level = poiLevel;
-                        buttonElement.addEventListener('click', handlePOIButtonClick);
-                        buttonElement.appendChild(textNode);
-    
-                        liElement.append(buttonElement);
-                        ulElement.append(liElement);
+                        if (poi.geometry) {
+                            var poiLongitude = poi.geometry.coordinates[0];
+                            var poiLatitude = poi.geometry.coordinates[1];
+                            let liElement = document.createElement("li");
+        
+                            let buttonElement = document.createElement("button");
+                            textNode = document.createTextNode(`${poiName} => étage ${poiLevel}`);
+                            buttonElement.classList.add("interactive-plan__poi__btn");
+                            buttonElement.dataset.fid = poiFID;
+                            buttonElement.dataset.longitude = poiLongitude;
+                            buttonElement.dataset.latitude = poiLatitude;
+                            buttonElement.dataset.level = poiLevel;
+                            buttonElement.addEventListener('click', handlePOIButtonClick);
+                            buttonElement.appendChild(textNode);
+        
+                            liElement.append(buttonElement);
+                            ulElement.append(liElement);
+                        } else {
+                            // Ca m'est arrivé d'avoir un GeoJSON (corrompu ?) avec une feature
+                            // dont la geometry était null
+                            console.warn(`Le POI de nom ${poiName} (${poiFID}) n\' pas de géometrie`);
+                        }
                     }
                 }
             }
@@ -353,136 +360,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         setMapTheme(styleConfig);
     });
 
-    // Ancien code de chargement du GEOJSON du premier POC de Antho
-    /*function loadGeoJSON(type, level) {
-        console.log('loadGeoJSON', type, level)
-        const url = type === 'level'
-            ? `json/level_${level}.geojson`
-            : `json/parking_${level}.geojson`;
-  
-        fetch(url)
-            .then(response => response.ok ? response.json() : Promise.reject(`GeoJSON file not found: ${url}`))
-            .then(data => {vis
-                if (!data) return;
-  
-                data.features.forEach((feature, index) => {
-                    const featureType = feature.properties.type;
-                    const icon = feature.properties.icon;
-                    const layerId = `${type}_${feature.id || index}`;
-                    console.log('layerId', layerId);
-                    map.addSource(layerId, {
-                        'type': 'geojson',
-                        'data': feature
-                    });
-  
-                    if (featureType !== 'stair-poi') {
-                        map.addLayer({
-                            'id': `${layerId}_fill`,
-                            'type': 'fill-extrusion',
-                            'source': layerId,
-                            'paint': {
-                                'fill-extrusion-color': ['get', 'color'],
-                                'fill-extrusion-height': ['get', 'height'],
-                                'fill-extrusion-base': 0,
-                                'fill-extrusion-opacity': featureType === 'parking' ? 0.5 : 1
-                            }
-                        });
-                    }
-  
-                    if (featureType === 'stair-poi') {
-                        map.addLayer({
-                            'id': `${layerId}_fill`,
-                            'type': 'fill',
-                            'source': layerId,
-                            'paint': {
-                                'fill-color': ['get', 'color'],
-                                'fill-opacity': 0.3
-                            }
-                        });
-  
-                        map.addLayer({
-                            'id': `${layerId}_outline`,
-                            'type': 'line',
-                            'source': layerId,
-                            'paint': {
-                                'line-color': ['get', 'color'],
-                                'line-width': 3,
-                                'line-opacity': 0.7,
-                                'line-dasharray': [3, 3],
-                            }
-                        });
-                    }
-  
-                    if (featureType === 'ground') {
-                        map.addLayer({
-                            'id': `${layerId}_outline`,
-                            'type': 'line',
-                            'source': layerId,
-                            'paint': {
-                                'line-color': '#429cf8',
-                                'line-width': 1
-                            }
-                        });
-                    }
-  
-                    if (icon) {
-  
-                        map.on('mousemove', `${layerId}_fill`, () => {
-                            if (!modalActive) {
-                                map.setPaintProperty(`${layerId}_fill`, 'fill-extrusion-color', '#2679e3');
-                                map.getCanvas().style.cursor = 'pointer';
-                            }
-                        });
-  
-                        map.on('mouseleave', `${layerId}_fill`, () => {
-                            if (!modalActive) {
-                                map.setPaintProperty(`${layerId}_fill`, 'fill-extrusion-color', ['get', 'color']);
-                                map.getCanvas().style.cursor = '';
-                            }
-                        });
-  
-                        map.on('click', `${layerId}_fill`, (e) => {
-                            const center = turf.centerOfMass(feature);
-                            const coordinates = center.geometry.coordinates;
-  
-                            map.setPaintProperty(`${layerId}_fill`, 'fill-extrusion-color', '#0035AD');
-                            showModal(feature, layerId);
-  
-                            map.flyTo({
-                                center: coordinates,
-                                zoom: 20,
-                                essential: true
-                            });
-                        });
-  
-  
-                        const center = turf.centerOfMass(feature);
-                        const coordinates = center.geometry.coordinates;
-  
-                        const el = document.createElement('div');
-                        el.className = 'marker';
-                        el.style.backgroundImage = `url('images/icons/${icon}.png')`;
-  
-                        el.addEventListener('click', () => {
-                            showModal(feature);
-                            map.flyTo({
-                                center: coordinates,
-                                zoom: 20,
-                                essential: true
-                            });
-                        });
-  
-                        new maplibregl.Marker({ element: el })
-                            .setLngLat(coordinates)
-                            .addTo(map);
-                    }
-                });
-            })
-            .catch(error => {
-                console.error('Error loading GeoJSON:', error);
-            });
-    }*/
-
     function hideAllLevels() {
         for (const levelId of levelGeoJSONloaded) {
             // console.log(`On cache le niveau ${levelId}`);
@@ -537,106 +414,99 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     // Chargement d'un GeoJSON décrivant l'étage sélectionné
-    function loadLevelGeoJSON(level) {
+    async function loadLevelGeoJSON(level) {
         const levelId = level.id;
-        console.log('loadLevelGeoJSON', levelId)
-        const url = `json/eap-level_${levelId}.geojson`;
+        const url = level.geojson;
+        console.log(`loadLevelGeoJSON, level=${levelId} url=${url}`);
 
         if (!levelGeoJSONloaded.includes(levelId)) {
-            console.log(`Level ${levelId} never loaded => requesting`);
             levelGeoJSONloaded.push(levelId);
+            try {
+                let response = await fetch(url);
+                if (!response.ok)
+                    throw new Error(response.statusText);
 
-            // TODO passer en try/catch + await pour harmoniser avec chargement des catégories
-            fetch(url)
-                .then(response => response.ok ? response.json() : Promise.reject(`GeoJSON file not found: ${url}`))
-                .then(data => {
-                    if (!data) return;
+                let data = await response.json();
+                // console.log("data", data);
 
-                    const sourceId = 'eap-source-level' + levelId;
-                    const layerId = 'eap-layer-level' + levelId;
-                    map.addSource(sourceId, {
-                        'type': 'geojson',
-                        'data': data
-                    });
+                const sourceId = 'eap-source-level' + levelId;
+                const layerId = 'eap-layer-level' + levelId;
+                map.addSource(sourceId, {
+                    'type': 'geojson',
+                    'data': data
+                });
 
-                    // Ajout d'une layer pour le contour du sol (=> "ground")
-                    // Couleur rouge/bleu pour FR/CH
-                    map.addLayer({
-                        'id': layerId,
-                        'type': 'fill',
-                        'source': sourceId,
-                        'paint': {
-                            'fill-outline-color': 'black',
-                            'fill-color': ['coalesce', ['get', 'color'], '#aaaaaa'],
-                            'fill-opacity': 0.7,
-                        },
-                        'filter': ['==', 'type', 'ground']
-                    }, 'eap-layer-poi');
+                // Ajout d'une layer pour le contour du sol (=> "ground")
+                // Couleur rouge/bleu pour FR/CH
+                map.addLayer({
+                    'id': layerId,
+                    'type': 'fill',
+                    'source': sourceId,
+                    'paint': {
+                        'fill-outline-color': 'black',
+                        'fill-color': ['coalesce', ['get', 'color'], '#aaaaaa'],
+                        'fill-opacity': 0.7,
+                    },
+                    'filter': ['==', 'type', 'ground']
+                }, 'eap-layer-poi');
 
-                    // Ajout d'une deuxième layer en 3D pour la hauteur des bâtiments internes de l'étage
-                    map.addLayer({
-                        'id': layerId + '-extrusion',
-                        'type': 'fill-extrusion',
-                        'source': sourceId,
-                        'paint': {
-                            'fill-extrusion-color':
-                                [
-                                    'match',
-                                    ['get', 'type'],
-                                    'building', '#ccc',
-                                    'shop', '#d8256e',
-                                    'bar', '#2535f4',
-                                    'belt', '#555',
-                                    'check', '#555',
-                                    'gate', '#050',
-                                    'toilets', '#ffc000',
-                                    'stairs', '#111',
-                          /* other */ '#ccc'
-                                ],
-                            'fill-extrusion-height':
-                                [
-                                    'match',
-                                    ['get', 'type'],
-                                    'building', 4,
-                                    'shop', 4,
-                                    'bar', 4,
-                                    'belt', 1,
-                                    'check', 2,
-                                    'gate', 2,
-                                    'toilets', 4,
-                                    'stairs', 2,
-                          /* other */ 0
-                                ],
-                            'fill-extrusion-base': 0,
-                            'fill-extrusion-opacity': 0.8
-                        },
-                        'filter': [
-                            'in',
-                            ['get', 'type'],
-                            ['literal',
-                                [
-                                    'building',
-                                    'shop',
-                                    'bar',
-                                    'belt',
-                                    'check',
-                                    'gate',
-                                    'toilets',
-                                    'stairs',
-                                ]
+                // Ajout d'une deuxième layer en 3D pour la hauteur des bâtiments internes de l'étage
+                map.addLayer({
+                    'id': layerId + '-extrusion',
+                    'type': 'fill-extrusion',
+                    'source': sourceId,
+                    'paint': {
+                        'fill-extrusion-color':
+                            [
+                                'match',
+                                ['get', 'type'],
+                                'building', '#ccc',
+                                'shop', '#d8256e',
+                                'bar', '#2535f4',
+                                'belt', '#555',
+                                'check', '#555',
+                                'gate', '#050',
+                                'toilets', '#ffc000',
+                                'stairs', '#111',
+                        /* other */ '#ccc'
+                            ],
+                        'fill-extrusion-height':
+                            [
+                                'match',
+                                ['get', 'type'],
+                                'building', 4,
+                                'shop', 4,
+                                'bar', 4,
+                                'belt', 1,
+                                'check', 2,
+                                'gate', 2,
+                                'toilets', 4,
+                                'stairs', 2,
+                        /* other */ 0
+                            ],
+                        'fill-extrusion-base': 0,
+                        'fill-extrusion-opacity': 0.8
+                    },
+                    'filter': [
+                        'in',
+                        ['get', 'type'],
+                        ['literal',
+                            [
+                                'building',
+                                'shop',
+                                'bar',
+                                'belt',
+                                'check',
+                                'gate',
+                                'toilets',
+                                'stairs',
                             ]
                         ]
-                    }, 'eap-layer-poi');
-                    /*map.once('sourcedata', (e) => {
-                        console.log('loadLevelGeoJSON => sourcedata', e)
-                    });
-                    map.once('data', (e) => {
-                        console.log('loadLevelGeoJSON => data', e)
-                    });*/
-                })
-                .catch(error => {
-                    console.error('Error loading GeoJSON:', error);
-                });
+                    ]
+                }, 'eap-layer-poi');
+            } catch (err) {
+                console.error(err);
+            }
         }
     }
 
@@ -650,13 +520,20 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (!response.ok)
                     throw new Error(response.statusText);
                 pois = await response.json();
-                console.log("pois", pois);
+                // console.log("pois", pois);
 
                 for (const poi of pois.features) {
                     console.log(`Traitement du POI ${poi.properties.name} de catégorie ${poi.properties.category}`);
                     const imageId = 'eap-' + poi.properties.category;
 
                     // Cherche l'icône associée au POI à partir de sa catégorie
+                    // TODO en fait plutôt que de charger les icônes en bouclant sur les POI
+                    // et de devoir gérer des doublons (N POIs pour 1 même catégories)
+                    // il vaudrait mieux charger les icônes après chargement des catégories
+                    // Ensuite ci dessous, une optimisation serait de ne mettre dans la couche "symbol"
+                    // de Maplibre que les POIs dont la catégorie (et l'icône) a été précédemment chargée
+                    // Note : en vrai avec Drupal, le pb ne devrait pas se poser car les POI
+                    // seront toujours dans une catégorie avec icône (normalement) 
                     const category = categories.find(c => c.id === poi.properties.category)
                     let icon = null;
                     if (category !== undefined) {
@@ -785,8 +662,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 button.classList.toggle('-active', button.getAttribute('data-level') == currentLevel);
             });*/
             currentLevel = levels.find(l => l.id == levelId);
-            console.log('QDE, click level levels', levels);
-            console.log('QDE, click level currentLevel', currentLevel);
+            // console.log('QDE, click level levels', levels);
+            // console.log('QDE, click level currentLevel', currentLevel);
             applyFilters();
 
             const url = new URL(window.location);
