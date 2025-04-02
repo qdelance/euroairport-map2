@@ -9,11 +9,16 @@ import { layers, namedFlavor } from '@protomaps/basemaps';
 
 document.addEventListener('DOMContentLoaded', async function () {
 
-    // Position initiale de la carte + emprise maximum autorisée
-    // On interdit le zoom trop loin en dehors de l'aéroport
+    // Position initiale de la carte
     const initial_center = [7.53, 47.599];
     const initial_zoom = 14;
-    const bounds = [[7.46, 47.57], [7.60, 47.63]];
+    // Rotation initiale car on n'est pas selon l'axe Nord/Sud
+    const initial_bearing = 245;
+    // Inclinaison initiale pour avoir l'effet 3D de l'extrusion
+    const initial_pitch = 55;
+    // Limite d'emprise (on n'autorise pas l'utilisateur à s'éloigner de l'aéroport)
+    // évite aussi de devoir servir trop de tuiles vectorielle (export Protomaps)
+    const max_bounds = [[7.46, 47.57], [7.60, 47.63]];
 
     // Variables globales ci dessous
     let map;
@@ -281,8 +286,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             style: styleConfig,
             center: initial_center,
             zoom: initial_zoom,
-            maxBounds: bounds,
-            bearing: 245,
+            maxBounds: max_bounds,
+            bearing: initial_bearing,
+            pitch: initial_pitch,
             antialias: true
         });
         map.addControl(new maplibregl.NavigationControl());
