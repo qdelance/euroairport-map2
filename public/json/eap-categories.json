@@ -116,5 +116,11 @@
         "parent": "parking",
         "icon": "./icons/eap-parking-fr.png",
         "name": "Parkings FR"
+    },
+    {
+        "id": "parking-cash",
+        "parent": "parking",
+        "icon": "./icons/eap-joker.png",
+        "name": "Bornes de paiement"
     }
 ]
