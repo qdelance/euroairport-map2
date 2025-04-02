@@ -23,34 +23,45 @@ npm run build # en prod => c'est ce qui est fait dans Github pages, cf contenu `
 
 ## TODO
 
-Gestion des catégories à plusieurs niveaux
+- [x] Gestion des catégories à plusieurs niveaux
 
-Mettre le lien GeoJSON de l'état dans eap-levels.json
+- [x] Mettre le lien GeoJSON de l'état dans eap-levels.json
 
-Ergonomie générale des filtres (contenu barre de gauche)
+- [x] Ergonomie générale des filtres (contenu barre de gauche)
 
-Passage de paramètres dans l'URL pour arriver sur le plan avec catégorie ou niveau ou POI préselectionné
+- [ ] Mettre en évidence l'étage sélectionné dans la barre de droite
 
-Carto : 
+- [ ] Passage de paramètres dans l'URL pour arriver sur le plan avec catégorie ou niveau ou POI préselectionné
+
+- [ ] Carto : 
 * Voir si on garde la layer symbol avec ses limites (icônes PNG, trop d'images à charger sans sprite) ou si on revient aux Marker
 * Si choix marker : https://stackoverflow.com/a/55828753 ou https://stackoverflow.com/a/55917076
 * Si on converse symbol, voir si on garde layer symbol ou circle ou un mix des 2
 * piste = mix des 2 : https://github.com/mapbox/mapbox-gl-js/issues/3605#issuecomment-290330684
 
-Fermer popup sur une action : https://stackoverflow.com/a/59848998 ou https://stackoverflow.com/a/63006609
+- [x] Fermer popup sur une action : https://stackoverflow.com/a/59848998 ou https://stackoverflow.com/a/63006609
 
-Prévoir un ajustement de la carte sur les éléments affichés : https://stackoverflow.com/questions/45770260/how-to-get-the-results-of-a-filtered-mapbox-layer et https://docs.mapbox.com/mapbox-gl-js/example/fitbounds/
+- [ ] Prévoir un ajustement/centrage de la carte sur les éléments affichés : https://stackoverflow.com/questions/45770260/how-to-get-the-results-of-a-filtered-mapbox-layer et https://docs.mapbox.com/mapbox-gl-js/example/fitbounds/
 
-Intégrer avec Drupal (actuellement des (geo)json codés en dur)
+- [x] Intégrer avec Drupal (actuellement des (geo)json codés en dur)
 
 ## A documenter
 
-Documenter le setStyle https://github.com/maplibre/maplibre-gl-js/issues/2587 + https://docs.mapbox.com/mapbox-gl-js/example/style-switch/
+- [ ] Documenter le setStyle https://github.com/maplibre/maplibre-gl-js/issues/2587 + https://docs.mapbox.com/mapbox-gl-js/example/style-switch/
 
-Documenter l'extraction des tuiles Protomaps
+- [ ] Documenter l'extraction des tuiles Protomaps
 
-Documenter l'usage Vite et Github pages :
+- [ ] Documenter l'usage Vite et Github pages :
 * https://til.simonwillison.net/gis/pmtiles
 * https://til.simonwillison.net/github-actions/vite-github-pages
 
-Positionner un ID sur chaque feature dans QGis : https://gis.stackexchange.com/a/132859
+- [ ] Positionner un ID sur chaque feature dans QGis : https://gis.stackexchange.com/a/132859
+
+- [ ] usage général de QGis :
+* charger une image, géoréférencer
+* faire des vrais carrés/rectangles
+* gestion des (faux) arrondis
+* éditer un polygone, découper/merger
+* table des attributs, filtres
+* export GeoJSON, notion de précision
+* sujets spécifiques EAP (ground, color, height pour extrusion)
