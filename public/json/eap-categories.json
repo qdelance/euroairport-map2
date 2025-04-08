@@ -2,30 +2,31 @@
     {
         "id": "bar-restaurant",
         "icon": "./icons/eap-bar.png",
-        "name": "Bars, restaurants"
-    },
-    {
-        "id": "bar",
-        "parent": "bar-restaurant",
-        "icon": "./icons/eap-bar.png",
-        "name": "Bars"
+        "name": "Restauration"
     },
     {
         "id": "restaurant",
         "parent": "bar-restaurant",
         "icon": "./icons/eap-restaurant.png",
-        "name": "Restaurants"
+        "name": "Restaurant"
     },
+    {
+        "id": "bar",
+        "parent": "bar-restaurant",
+        "icon": "./icons/eap-bar.png",
+        "name": "Bar / café"
+    },
+
     {
         "id": "shop-dutyfree",
         "icon": "./icons/eap-shop.png",
-        "name": "Boutiques et shopping"
+        "name": "Commerces"
     },
     {
         "id": "shop",
         "parent": "shop-dutyfree",
         "icon": "./icons/eap-shop.png",
-        "name": "Commerce"
+        "name": "Boutiques"
     },
     {
         "id": "dutyfree",
@@ -34,71 +35,98 @@
         "name": "Duty free"
     },
     {
-        "id": "must",
+        "id": "rent",
+        "parent": "shop-dutyfree",
         "icon": "./icons/eap-joker.png",
-        "name": "Les indispensables"
+        "name": "Location de voiture"
     },
     {
-        "id": "toilets",
-        "parent": "must",
-        "icon": "./icons/eap-toilets.png",
-        "name": "Toilettes"
-    },
-    {
-        "id": "info",
-        "parent": "must",
+        "id": "travel",
         "icon": "./icons/eap-joker.png",
-        "name": "Points info"
-    },
-    {
-        "id": "change",
-        "parent": "must",
-        "icon": "./icons/eap-joker.png",
-        "name": "Change"
-    },
-    {
-        "id": "mixed",
-        "parent": "must",
-        "icon": "./icons/eap-joker.png",
-        "name": "Divers"
+        "name": "Voyage"
     },
     {
         "id": "gate",
+        "parent": "travel",
         "icon": "./icons/eap-gate.png",
-        "name": "Portes d'embarquement"
+        "name": "Porte d'embarquement"
+    },
+    {
+        "id": "check",
+        "parent": "travel",
+        "icon": "./icons/eap-check.png",
+        "name": "Enregistrement / check-in"
     },
     {
         "id": "belt",
+        "parent": "travel",
         "icon": "./icons/eap-belt.png",
         "name": "Tapis bagage"
     },
     {
-        "id": "check",
-        "icon": "./icons/eap-check.png",
-        "name": "Guichets d'enregistrement"
+        "id": "company",
+        "parent": "travel",
+        "icon": "./icons/eap-joker.png",
+        "name": "Compagnies aériennes"
     },
     {
-        "id": "access",
-        "icon": "./icons/eap-access.png",
-        "name": "Accès, escaliers, ascenseurs"
+        "id": "luggage",
+        "parent": "travel",
+        "icon": "./icons/eap-joker.png",
+        "name": "Bagages hors format"
     },
     {
-        "id": "stairs",
-        "parent": "access",
-        "icon": "./icons/eap-stairs.png",
-        "name": "Escaliers"
+        "id": "services",
+        "icon": "./icons/eap-joker.png",
+        "name": "Services"
     },
     {
-        "id": "escalator",
-        "parent": "access",
-        "icon": "./icons/eap-escalator.png",
-        "name": "Escalators"
+        "id": "toilets",
+        "parent": "services",
+        "icon": "./icons/eap-toilets.png",
+        "name": "Toilettes"
     },
     {
-        "id": "elevator",
-        "parent": "access",
-        "icon": "./icons/eap-elevator.png",
-        "name": "Ascenseurs"
+        "id": "smoking",
+        "parent": "services",
+        "icon": "./icons/eap-joker.png",
+        "name": "Zone fumeurs"
+    },
+    {
+        "id": "info",
+        "parent": "services",
+        "icon": "./icons/eap-joker.png",
+        "name": "Point info"
+    },
+    {
+        "id": "change",
+        "parent": "services",
+        "icon": "./icons/eap-joker.png",
+        "name": "Change"
+    },
+    {
+        "id": "cash",
+        "parent": "services",
+        "icon": "./icons/eap-joker.png",
+        "name": "Distribiuteurs d'argent"
+    },
+    {
+        "id": "baby",
+        "parent": "services",
+        "icon": "./icons/eap-joker.png",
+        "name": "Espace bébé"
+    },
+    {
+        "id": "child",
+        "parent": "services",
+        "icon": "./icons/eap-joker.png",
+        "name": "Coin jeu pour enfant"
+    },
+    {
+        "id": "leisure",
+        "parent": "services",
+        "icon": "./icons/eap-joker.png",
+        "name": "Espaces détentes"
     },
     {
         "id": "parking",
@@ -122,5 +150,76 @@
         "parent": "parking",
         "icon": "./icons/eap-joker.png",
         "name": "Bornes de paiement"
+    },
+    {
+        "id": "navigation",
+        "icon": "./icons/eap-access.png",
+        "name": "Navigation"
+    },
+    {
+        "id": "hall",
+        "parent": "navigation",
+        "icon": "./icons/eap-joker.png",
+        "name": "Hall"
+    },
+    {
+        "id": "passenger",
+        "parent": "navigation",
+        "icon": "./icons/eap-joker.png",
+        "name": "Espace passager"
+    },
+    {
+        "id": "inout",
+        "parent": "navigation",
+        "icon": "./icons/eap-joker.png",
+        "name": "Entrées / sorties FR et CH"
+    },
+    {
+        "id": "elevator",
+        "parent": "navigation",
+        "icon": "./icons/eap-elevator.png",
+        "name": "Ascenseurs"
+    },
+    {
+        "id": "stairs",
+        "parent": "navigation",
+        "icon": "./icons/eap-stairs.png",
+        "name": "Escaliers"
+    },
+    {
+        "id": "escalator",
+        "parent": "navigation",
+        "icon": "./icons/eap-escalator.png",
+        "name": "Escalators"
+    },
+    {
+        "id": "security",
+        "parent": "navigation",
+        "icon": "./icons/eap-joker.png",
+        "name": "Contrôles"
+    },
+    {
+        "id": "disabled",
+        "parent": "navigation",
+        "icon": "./icons/eap-joker.png",
+        "name": "Assistance PMR"
+    },
+    {
+        "id": "dispute",
+        "parent": "navigation",
+        "icon": "./icons/eap-joker.png",
+        "name": "Litige bagage"
+    },
+    {
+        "id": "taxi",
+        "parent": "navigation",
+        "icon": "./icons/eap-joker.png",
+        "name": "Taxi"
+    },
+    {
+        "id": "bus",
+        "parent": "navigation",
+        "icon": "./icons/eap-joker.png",
+        "name": "Bus"
     }
 ]
