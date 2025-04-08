@@ -1,68 +1,30 @@
 {
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "type": "Feature",
-        "properties": {},
-        "geometry": {
-          "coordinates": [
-            [
-              [
-                7.530674988583513,
-                47.60029268516169
-              ],
-              [
-                7.531731777192931,
-                47.59873202849238
-              ],
-              [
-                7.532124797750271,
-                47.59884392618059
-              ],
-              [
-                7.531775446144707,
-                47.59937985389351
-              ],
-              [
-                7.531941388157691,
-                47.5994093003122
-              ],
-              [
-                7.532124797750271,
-                47.599185507115266
-              ],
-              [
-                7.532430480405537,
-                47.59931507171433
-              ],
-              [
-                7.531775446144707,
-                47.60026323924018
-              ],
-              [
-                7.531295087685237,
-                47.600157233786376
-              ],
-              [
-                7.5315134324397945,
-                47.599762656041634
-              ],
-              [
-                7.531391159377108,
-                47.599691985086764
-              ],
-              [
-                7.530867131967284,
-                47.60032802024534
-              ],
-              [
-                7.530674988583513,
-                47.60029268516169
-              ]
-            ]
-          ],
-          "type": "Polygon"
-        }
-      }
-    ]
-  }
+"type": "FeatureCollection",
+"name": "eap-level_5",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"xy_coordinate_resolution": 1e-06,
+"features": [
+{ "type": "Feature", "properties": { "type": "ground", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531852, 47.598834 ], [ 7.531528, 47.599301 ], [ 7.531626, 47.599333 ], [ 7.531292, 47.599822 ], [ 7.53119, 47.59979 ], [ 7.530868, 47.600259 ], [ 7.531191, 47.600355 ], [ 7.53146, 47.599965 ], [ 7.53177, 47.600064 ], [ 7.531502, 47.600455 ], [ 7.531677, 47.600514 ], [ 7.532661, 47.599094 ], [ 7.532481, 47.599036 ], [ 7.532218, 47.59942 ], [ 7.531898, 47.59932 ], [ 7.532165, 47.598933 ], [ 7.531852, 47.598834 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "bar", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531433, 47.59971 ], [ 7.531328, 47.599862 ], [ 7.53154, 47.599927 ], [ 7.531593, 47.599851 ], [ 7.531479, 47.599815 ], [ 7.531528, 47.599739 ], [ 7.531433, 47.59971 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "bar", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531906, 47.598907 ], [ 7.531844, 47.598996 ], [ 7.531906, 47.599016 ], [ 7.531828, 47.599131 ], [ 7.531916, 47.599159 ], [ 7.532057, 47.598954 ], [ 7.531906, 47.598907 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "building", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531828, 47.599131 ], [ 7.531766, 47.599221 ], [ 7.531853, 47.599248 ], [ 7.531916, 47.599159 ], [ 7.531828, 47.599131 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.532209, 47.599422 ], [ 7.532169, 47.599478 ], [ 7.532205, 47.599489 ], [ 7.532245, 47.599433 ], [ 7.532209, 47.599422 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.532233, 47.59945 ], [ 7.532186, 47.599517 ], [ 7.532227, 47.59953 ], [ 7.532273, 47.599463 ], [ 7.532233, 47.59945 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531798, 47.600006 ], [ 7.531761, 47.60006 ], [ 7.531798, 47.600072 ], [ 7.531836, 47.600018 ], [ 7.531798, 47.600006 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531861, 47.599983 ], [ 7.531812, 47.600051 ], [ 7.531854, 47.600065 ], [ 7.531902, 47.599997 ], [ 7.531861, 47.599983 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531679, 47.600378 ], [ 7.531623, 47.600461 ], [ 7.531692, 47.600483 ], [ 7.531749, 47.6004 ], [ 7.531679, 47.600378 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.532575, 47.599083 ], [ 7.532519, 47.599165 ], [ 7.532589, 47.599187 ], [ 7.532646, 47.599105 ], [ 7.532575, 47.599083 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531907, 47.598904 ], [ 7.532054, 47.598951 ], [ 7.532063, 47.598938 ], [ 7.531916, 47.598892 ], [ 7.531907, 47.598904 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531928, 47.598875 ], [ 7.532075, 47.59892 ], [ 7.532066, 47.598934 ], [ 7.531919, 47.598888 ], [ 7.531928, 47.598875 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531706, 47.599205 ], [ 7.531847, 47.599249 ], [ 7.531838, 47.599262 ], [ 7.531697, 47.599218 ], [ 7.531706, 47.599205 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531694, 47.599223 ], [ 7.531834, 47.599267 ], [ 7.531826, 47.599279 ], [ 7.531685, 47.599235 ], [ 7.531694, 47.599223 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.53122, 47.599908 ], [ 7.531361, 47.599953 ], [ 7.531353, 47.599965 ], [ 7.531211, 47.59992 ], [ 7.53122, 47.599908 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531199, 47.599938 ], [ 7.53134, 47.599982 ], [ 7.531349, 47.599969 ], [ 7.531208, 47.599925 ], [ 7.531199, 47.599938 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.530989, 47.600242 ], [ 7.53113, 47.600285 ], [ 7.531122, 47.600298 ], [ 7.530981, 47.600254 ], [ 7.530989, 47.600242 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.530968, 47.600272 ], [ 7.531109, 47.600316 ], [ 7.531118, 47.600303 ], [ 7.530977, 47.600258 ], [ 7.530968, 47.600272 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "toilets", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.532006, 47.599442 ], [ 7.531967, 47.599497 ], [ 7.532036, 47.599519 ], [ 7.532074, 47.599463 ], [ 7.532006, 47.599442 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "toilets", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.532074, 47.599463 ], [ 7.532036, 47.599519 ], [ 7.532109, 47.599542 ], [ 7.532147, 47.599486 ], [ 7.532074, 47.599463 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "toilets", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531602, 47.599872 ], [ 7.531559, 47.599935 ], [ 7.531613, 47.599952 ], [ 7.531656, 47.599889 ], [ 7.531602, 47.599872 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "toilets", "height": null, "color": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531656, 47.599889 ], [ 7.531613, 47.599952 ], [ 7.531673, 47.599971 ], [ 7.531716, 47.599908 ], [ 7.531656, 47.599889 ] ] ] ] } }
+]
+}

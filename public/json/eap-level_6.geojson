@@ -1,36 +1,15 @@
 {
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "type": "Feature",
-        "properties": {},
-        "geometry": {
-          "coordinates": [
-            [
-              [
-                7.531155347042954,
-                47.59988044075473
-              ],
-              [
-                7.531312555266169,
-                47.599703763585865
-              ],
-              [
-                7.531565835179919,
-                47.59975676679926
-              ],
-              [
-                7.531330022845793,
-                47.59996288989578
-              ],
-              [
-                7.531155347042954,
-                47.59988044075473
-              ]
-            ]
-          ],
-          "type": "Polygon"
-        }
-      }
-    ]
-  }
+"type": "FeatureCollection",
+"name": "eap-level_6",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"xy_coordinate_resolution": 1e-06,
+"features": [
+{ "type": "Feature", "properties": { "type": "stairs", "color": null, "height": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531211, 47.599886 ], [ 7.53134, 47.599927 ], [ 7.531331, 47.599939 ], [ 7.531202, 47.599898 ], [ 7.531211, 47.599886 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "color": null, "height": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531199, 47.599903 ], [ 7.531328, 47.599943 ], [ 7.531319, 47.599956 ], [ 7.53119, 47.599915 ], [ 7.531199, 47.599903 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "color": null, "height": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.530988, 47.600208 ], [ 7.531116, 47.600248 ], [ 7.531108, 47.600261 ], [ 7.530979, 47.60022 ], [ 7.530988, 47.600208 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "color": null, "height": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.530977, 47.600225 ], [ 7.531105, 47.600266 ], [ 7.531096, 47.600279 ], [ 7.530968, 47.600238 ], [ 7.530977, 47.600225 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "color": null, "height": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.531093, 47.599914 ], [ 7.531222, 47.599955 ], [ 7.531208, 47.599975 ], [ 7.531079, 47.599934 ], [ 7.531093, 47.599914 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "stairs", "color": null, "height": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.530939, 47.600136 ], [ 7.531068, 47.600178 ], [ 7.531054, 47.600198 ], [ 7.530925, 47.600157 ], [ 7.530939, 47.600136 ] ] ] ] } },
+{ "type": "Feature", "properties": { "type": "building", "color": null, "height": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 7.530939, 47.600136 ], [ 7.531079, 47.599934 ], [ 7.531208, 47.599975 ], [ 7.531222, 47.599955 ], [ 7.531236, 47.59996 ], [ 7.531226, 47.599981 ], [ 7.531208, 47.600019 ], [ 7.531184, 47.600066 ], [ 7.531155, 47.600108 ], [ 7.531122, 47.600147 ], [ 7.531091, 47.600178 ], [ 7.531067, 47.600202 ], [ 7.531054, 47.600198 ], [ 7.531068, 47.600178 ], [ 7.530939, 47.600136 ] ] ] ] } }
+]
+}
