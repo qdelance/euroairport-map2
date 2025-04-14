@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     return level;
                 });
                 let uniqLevelsOfselectedPOI = levelsOfselectedPOI.filter((value, index, array) => array.indexOf(value) === index);
-                let sortedUniqLevelsOfselectedPOI = uniqLevelsOfselectedPOI.sort();
+                let sortedUniqLevelsOfselectedPOI = uniqLevelsOfselectedPOI.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
                 // console.log('QDE, sortedUniqLevelsOfselectedPOI', sortedUniqLevelsOfselectedPOI);
 
                 let liElement = document.createElement("li");
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             let liElement = document.createElement("li");
         
                             let buttonElement = document.createElement("button");
-                            textNode = document.createTextNode(`${poiName} => étage ${poiLevel}`);
+                            textNode = document.createTextNode(`${poiName}`);
                             buttonElement.classList.add("interactive-plan__poi__btn");
                             buttonElement.dataset.fid = poiFID;
                             buttonElement.dataset.longitude = poiLongitude;
@@ -275,8 +275,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (map) {
             map.remove();
         }
-
-        console.log('createMap');
 
         let protocol = new Protocol();
         maplibregl.addProtocol("pmtiles", protocol.tile);
@@ -537,7 +535,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 // console.log("pois", pois);
 
                 for (const poi of pois.features) {
-                    console.log(`Traitement du POI ${poi.properties.name} de catégorie ${poi.properties.category}`);
+                    // console.log(`Traitement du POI ${poi.properties.name} de catégorie ${poi.properties.category}`);
                     const imageId = 'eap-' + poi.properties.category;
 
                     // Cherche l'icône associée au POI à partir de sa catégorie
