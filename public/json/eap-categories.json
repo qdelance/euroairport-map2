@@ -108,7 +108,7 @@
         "id": "cash",
         "parent": "services",
         "icon": "./icons/eap-joker.png",
-        "name": "Distribiuteurs d'argent"
+        "name": "Distributeurs d'argent"
     },
     {
         "id": "baby",

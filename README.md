@@ -45,6 +45,8 @@ npm run build # en prod => c'est ce qui est fait dans Github pages, cf contenu `
 
 - [x] Intégrer avec Drupal (actuellement des (geo)json codés en dur)
 
+- [ ] Gérer la scrollbar dans la barre de gauche quand on a trop d'éléments (exemple Voyage > Portes d'embarquement)
+
 ## A documenter
 
 - [ ] Documenter le setStyle https://github.com/maplibre/maplibre-gl-js/issues/2587 + https://docs.mapbox.com/mapbox-gl-js/example/style-switch/
