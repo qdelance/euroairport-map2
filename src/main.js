@@ -463,6 +463,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                     'source': sourceId,
                     'paint': {
                         'fill-extrusion-color':
+                        [
+                            'coalesce',
+                            ['get', 'color'],
                             [
                                 'match',
                                 ['get', 'type'],
@@ -474,9 +477,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 'gate', '#050',
                                 'toilets', '#ffc000',
                                 'stairs', '#111',
-                        /* other */ '#ccc'
-                            ],
+                                /* other */ '#ccc'
+                            ]
+                        ],
                         'fill-extrusion-height':
+                        [
+                            'coalesce',
+                            ['get', 'height'],
                             [
                                 'match',
                                 ['get', 'type'],
@@ -488,8 +495,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 'gate', 2,
                                 'toilets', 4,
                                 'stairs', 2,
-                        /* other */ 0
+                                /* other */ 0
                             ],
+                        ],
                         'fill-extrusion-base': 0,
                         'fill-extrusion-opacity': 0.8
                     },
