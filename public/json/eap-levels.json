@@ -1,7 +1,7 @@
 [
     {
         "id": 0,
-        "name": "0",
+        "name": "1 - Parkings",
         "geojson": "./json/eap-level_0.geojson"
     },
     {
@@ -21,12 +21,12 @@
     },
     {
         "id": 5,
-        "name": "5",
+        "name": "5 - Restaurants",
         "geojson": "./json/eap-level_5.geojson"
     },
     {
         "id": 6,
-        "name": "6",
+        "name": "6 - Business",
         "geojson": "./json/eap-level_6.geojson"
     }
 ]
