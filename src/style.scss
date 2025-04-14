@@ -67,6 +67,9 @@ body {
 	}
 
 	&__category {
+		top: 0;
+		bottom: 0;
+		overflow: auto;
 		display: none;
 		width: 200px;
 		min-width: 200px;
