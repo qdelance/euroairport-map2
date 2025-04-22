@@ -1,225 +1,230 @@
 [
     {
         "id": "bar-restaurant",
-        "icon": "./icons/eap-bar.png",
+        "icon": "./icons/new/restauration.png",
         "name": "Restauration"
     },
     {
         "id": "restaurant",
         "parent": "bar-restaurant",
-        "icon": "./icons/eap-restaurant.png",
+        "icon": "./icons/new/restaurant.png",
         "name": "Restaurant"
     },
     {
         "id": "bar",
         "parent": "bar-restaurant",
-        "icon": "./icons/eap-bar.png",
+        "icon": "./icons/new/bar-cafe.png",
         "name": "Bar / café"
     },
 
     {
         "id": "shop-dutyfree",
-        "icon": "./icons/eap-shop.png",
+        "icon": "./icons/new/commerce.png",
         "name": "Commerces"
     },
     {
         "id": "shop",
         "parent": "shop-dutyfree",
-        "icon": "./icons/eap-shop.png",
+        "icon": "./icons/new/boutique.png",
         "name": "Boutiques"
     },
     {
         "id": "dutyfree",
         "parent": "shop-dutyfree",
-        "icon": "./icons/eap-dutyfree.png",
+        "icon": "./icons/new/duty-free.png",
         "name": "Duty free"
     },
     {
         "id": "rent",
         "parent": "shop-dutyfree",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/voiture-location.png",
         "name": "Location de voiture"
     },
     {
         "id": "travel",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/Vols.png",
         "name": "Voyage"
     },
     {
         "id": "gate",
         "parent": "travel",
-        "icon": "./icons/eap-gate.png",
+        "icon": "./icons/new/embarquement.png",
         "name": "Porte d'embarquement"
     },
     {
         "id": "check",
         "parent": "travel",
-        "icon": "./icons/eap-check.png",
+        "icon": "./icons/new/enregistrement-bagage.png",
         "name": "Enregistrement / check-in"
     },
     {
         "id": "belt",
         "parent": "travel",
-        "icon": "./icons/eap-belt.png",
+        "icon": "./icons/new/bagage-tapis.png",
         "name": "Tapis bagage"
     },
     {
         "id": "company",
         "parent": "travel",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/compagnie-aerienne.png",
         "name": "Compagnies aériennes"
     },
     {
         "id": "luggage",
         "parent": "travel",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/bagage-hors-format.png",
         "name": "Bagages hors format"
     },
     {
         "id": "services",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/Passager luggage.png",
         "name": "Services"
     },
     {
         "id": "toilets",
         "parent": "services",
-        "icon": "./icons/eap-toilets.png",
+        "icon": "./icons/new/toilettes-1.png",
         "name": "Toilettes"
     },
     {
         "id": "smoking",
         "parent": "services",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/fumeur.png",
         "name": "Zone fumeurs"
     },
     {
         "id": "info",
         "parent": "services",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/information.png",
         "name": "Point info"
     },
     {
         "id": "change",
         "parent": "services",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/change.png",
         "name": "Change"
     },
     {
         "id": "cash",
         "parent": "services",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/distributeur-argent.png",
         "name": "Distributeurs d'argent"
     },
     {
         "id": "baby",
         "parent": "services",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/voyageur-bebe.png",
         "name": "Espace bébé"
     },
     {
         "id": "child",
         "parent": "services",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/zone-enfant-jeux.png",
         "name": "Coin jeu pour enfant"
     },
     {
         "id": "leisure",
         "parent": "services",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/voyageur-attente_detente.png",
         "name": "Espaces détentes"
     },
     {
         "id": "parking",
-        "icon": "./icons/eap-parking.png",
+        "icon": "./icons/new/1_64_parking.png",
         "name": "Parkings"
     },
     {
         "id": "parking-ch",
         "parent": "parking",
-        "icon": "./icons/eap-parking-ch.png",
+        "icon": "./icons/new/parking-ch.png",
         "name": "Parkings CH"
     },
     {
         "id": "parking-fr",
         "parent": "parking",
-        "icon": "./icons/eap-parking-fr.png",
+        "icon": "./icons/new/parking-fr.png",
         "name": "Parkings FR"
     },
     {
         "id": "parking-cash",
         "parent": "parking",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/caisse-paiement-parking.png",
         "name": "Bornes de paiement"
     },
     {
         "id": "navigation",
-        "icon": "./icons/eap-access.png",
+        "icon": "./icons/new/navigation-plan.png",
         "name": "Navigation"
     },
     {
         "id": "hall",
         "parent": "navigation",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/hall-passager.png",
         "name": "Hall"
     },
     {
         "id": "passenger",
         "parent": "navigation",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/espace-passager.png",
         "name": "Espace passager"
     },
     {
         "id": "inout",
         "parent": "navigation",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/entrees-sorties.png",
         "name": "Entrées / sorties FR et CH"
     },
     {
         "id": "elevator",
         "parent": "navigation",
-        "icon": "./icons/eap-elevator.png",
+        "icon": "./icons/new/ascenseur.png",
         "name": "Ascenseurs"
     },
     {
         "id": "stairs",
         "parent": "navigation",
-        "icon": "./icons/eap-stairs.png",
+        "icon": "./icons/new/escalier-gauche.png",
         "name": "Escaliers"
     },
     {
         "id": "escalator",
         "parent": "navigation",
-        "icon": "./icons/eap-escalator.png",
+        "icon": "./icons/new/escalator-droite.png",
         "name": "Escalators"
     },
     {
         "id": "security",
         "parent": "navigation",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/douane-passeport.png",
         "name": "Contrôles"
     },
     {
         "id": "disabled",
         "parent": "navigation",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/assistance-PMR.png",
         "name": "Assistance PMR"
     },
     {
         "id": "dispute",
         "parent": "navigation",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/litige-bagage.png",
         "name": "Litige bagage"
     },
     {
         "id": "taxi",
         "parent": "navigation",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/taxi.png",
         "name": "Taxi"
     },
     {
         "id": "bus",
         "parent": "navigation",
-        "icon": "./icons/eap-joker.png",
+        "icon": "./icons/new/bus.png",
         "name": "Bus"
+    },
+    {
+        "id": "business-center",
+        "icon": "./icons/new/1_48_reunion-2.png",
+        "name": "Business Center"
     }
 ]
