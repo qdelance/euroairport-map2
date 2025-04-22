@@ -400,9 +400,42 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (currentCategory != null && currentLevel == null) {
             console.log(`Filtrage des POI par la catégorie ${currentCategory.id}`);
             map.setFilter('eap-layer-poi', ['==', 'category', currentCategory.id]);
+            const bounds = new maplibregl.LngLatBounds();
+            const selectedPOIs = pois.features.filter((feature) => 
+                feature.properties.category === currentCategory.id
+            );
+            if (selectedPOIs.length > 0) {
+                selectedPOIs.forEach(function (feature) {
+                    bounds.extend(feature.geometry.coordinates);
+                });
+                map.fitBounds(bounds, 
+                    { 
+                        padding: 0,
+                        bearing: map.getBearing(),
+                        pitch: map.getPitch(), 
+                        animate: true 
+                    }
+                );
+            }
         } else if (currentCategory == null && currentLevel != null) {
             console.log(`Filtrage des POI par l'étage ${currentLevel.id}`);
             map.setFilter('eap-layer-poi', ['==', 'level', currentLevel.id]);
+            
+            const bounds = new maplibregl.LngLatBounds();
+            const selectedPOIs = pois.features.filter((feature) => feature.properties.level === currentLevel.id);
+            if (selectedPOIs.length > 0) {
+                selectedPOIs.forEach(function (feature) {
+                    bounds.extend(feature.geometry.coordinates);
+                });
+                map.fitBounds(bounds, 
+                    { 
+                        padding: 0,
+                        bearing: map.getBearing(),
+                        pitch: map.getPitch(), 
+                        animate: true 
+                    }
+                );
+            }
         } else if (currentCategory != null && currentLevel != null) {
             console.log(`Filtrage des POI par l'étage ${currentLevel.id} et la catégorie ${currentCategory.id}`);
             map.setFilter('eap-layer-poi', [
@@ -411,9 +444,28 @@ document.addEventListener('DOMContentLoaded', async function () {
                 ['==', 'category', currentCategory.id]
             ]
             );
+
+            const bounds = new maplibregl.LngLatBounds();
+            const selectedPOIs = pois.features.filter((feature) => 
+                feature.properties.level === currentLevel.id &&
+                feature.properties.category === currentCategory.id
+            );
+            if (selectedPOIs.length > 0) {
+                selectedPOIs.forEach(function (feature) {
+                    bounds.extend(feature.geometry.coordinates);
+                });
+                map.fitBounds(bounds, 
+                    { 
+                        padding: 0,
+                        bearing: map.getBearing(),
+                        pitch: map.getPitch(), 
+                        animate: true 
+                    }
+                );
+            }
         } else {
             console.log(`Pas de filtrage des POI`);
-            map.setFilter('eap-layer-poi', null);
+            map.setLayoutProperty('eap-layer-poi', 'visibility', 'none');
         }
     }
 
@@ -563,18 +615,19 @@ document.addEventListener('DOMContentLoaded', async function () {
 
                 const sourceId = 'eap-source-poi';
                 const layerId = 'eap-layer-poi';
+                // const layerIdCircle = 'eap-layer-poi-circle';
                 map.addSource(sourceId, {
                     'type': 'geojson',
                     'data': pois
                 });
 
-                /* map.addLayer({
-                    'id': layerId,
+                /*map.addLayer({
+                    'id': layerIdCircle,
                     'type': 'circle',
                     'source': sourceId,
                     'paint': {
-                        'circle-color': 'red',
-                        'circle-radius': 5,
+                        'circle-color': 'white',
+                        'circle-radius': 13,
                         'circle-stroke-color': 'black',
                         'circle-stroke-width': 2,
   
@@ -588,23 +641,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                     'layout': {
                         'icon-image': ['concat', 'eap-', ['get', 'category']],
                         'icon-size': 0.5,
-                        'icon-allow-overlap': true,
+                        // Evite d'avoir des icônes les unes sur les autres (lisibilité)
+                        'icon-allow-overlap': false,
                         // 'text-field': ['get', 'name'],
+                        // Masque les symboles par défaut pour ne pas tout afficher sans filtre (illisible)
+                        'visibility': 'none'
                     }
                 });
-
-                /*let bounds = turf.bbox(data);
-                console.log(map);
-                console.log(map.getBearing());
-                console.log(map.getPitch());
-                map.fitBounds(
-                    bounds, 
-                    {
-                        padding: 20,
-                        bearing: map.getBearing(),
-                        pitch: map.getPitch(),
-                    }
-                );*/
 
                 map.on('mouseenter', layerId, () => {
                     map.getCanvas().style.cursor = 'pointer'
@@ -626,6 +669,17 @@ document.addEventListener('DOMContentLoaded', async function () {
                         zoom: 17,
                         essential: true
                     });
+                    // Autre solution ci dessous mais pas top, trop près du sol
+                    /*let bounds = new maplibregl.LngLatBounds();
+                    bounds.extend(coordinates);
+                    map.fitBounds(bounds, 
+                        { 
+                            padding: 200,
+                            bearing: map.getBearing(),
+                            pitch: map.getPitch(), 
+                            animate: true 
+                        }
+                    );*/
 
                     if (currentPopup) {
                         currentPopup.remove();
