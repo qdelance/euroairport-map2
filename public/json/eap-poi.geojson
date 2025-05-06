@@ -210,6 +210,7 @@
 { "type": "Feature", "properties": { "fid": 208, "name": "Toilettes hommes", "level": 5, "description": null, "category": "toilets" }, "geometry": { "type": "Point", "coordinates": [ 7.53202432014146, 47.599482476066008 ] } },
 { "type": "Feature", "properties": { "fid": 209, "name": "Toilettes femmes", "level": 5, "description": null, "category": "toilets" }, "geometry": { "type": "Point", "coordinates": [ 7.532094945015161, 47.599503093114464 ] } },
 { "type": "Feature", "properties": { "fid": 210, "name": "Toilettes hommes", "level": 5, "description": null, "category": "toilets" }, "geometry": { "type": "Point", "coordinates": [ 7.531612431071593, 47.599911021369209 ] } },
-{ "type": "Feature", "properties": { "fid": 211, "name": "Toilettes femmes", "level": 5, "description": null, "category": "toilets" }, "geometry": { "type": "Point", "coordinates": [ 7.531668726334368, 47.599931902248599 ] } }
+{ "type": "Feature", "properties": { "fid": 211, "name": "Toilettes femmes", "level": 5, "description": null, "category": "toilets" }, "geometry": { "type": "Point", "coordinates": [ 7.531668726334368, 47.599931902248599 ] } },
+{ "type": "Feature", "properties": { "fid": null, "name": "Business Center", "level": 6, "description": "Salles de travail réservables à l'EAP", "category": "business-center" }, "geometry": { "type": "Point", "coordinates": [ 7.531090477760985, 47.60005907978136 ] } }
 ]
 }

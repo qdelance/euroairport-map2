@@ -51,7 +51,13 @@ npm run build # en prod => c'est ce qui est fait dans Github pages, cf contenu `
 
 - [ ] Documenter le setStyle https://github.com/maplibre/maplibre-gl-js/issues/2587 + https://docs.mapbox.com/mapbox-gl-js/example/style-switch/
 
-- [ ] Documenter l'extraction des tuiles Protomaps
+- [x] Documenter l'extraction des tuiles Protomaps
+* Télécharger le binaires GO pmtiles sur https://github.com/protomaps/go-pmtiles/releases
+* Lancer la commande de récupération des tuiles vecto sur l'emprise "autour de l'EAP" : 
+
+```
+./pmtiles extract https://build.protomaps.com/20250317.pmtiles eap.pmtiles --bbox=7.255096,47.463379,7.811966,47.723159
+```
 
 - [ ] Documenter l'usage Vite et Github pages :
 * https://til.simonwillison.net/gis/pmtiles

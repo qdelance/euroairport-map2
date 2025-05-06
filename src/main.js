@@ -822,9 +822,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         // Attention on peut avoir des doublons
         // https://github.com/mapbox/mapbox-gl-js/issues/3147#issuecomment-244844915
-        const selectedPOIs = map.querySourceFeatures('eap-source-poi', {
+        /*const selectedPOIs = map.querySourceFeatures('eap-source-poi', {
             filter: ['==', ["get", "fid"], ["to-number", fid]]
-        });
+        });*/
 
         const poi = pois.features.find(poi => poi.properties.fid == fid)
         map.flyTo({
