@@ -666,7 +666,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     const coordinates = e.features[0].geometry.coordinates.slice();
                     map.flyTo({
                         center: coordinates,
-                        zoom: 17,
+                        // zoom: 17,
                         essential: true
                     });
                     // Autre solution ci dessous mais pas top, trop près du sol
@@ -829,7 +829,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const poi = pois.features.find(poi => poi.properties.fid == fid)
         map.flyTo({
             center: poi.geometry.coordinates,
-            zoom: 17,
+            // zoom: 17,
             essential: true
         });
 
