@@ -196,7 +196,7 @@
         "id": "security",
         "parent": "navigation",
         "icon": "./icons/new/douane-passeport.png",
-        "name": "Contrôles"
+        "name": "Contrôle passeports"
     },
     {
         "id": "disabled",
